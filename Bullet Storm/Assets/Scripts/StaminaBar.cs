@@ -31,13 +31,21 @@ public class StaminaBar : MonoBehaviour
 
     public void UseStamina()
     {
-        if(currentStamina == maxStamina)
+        if(Mathf.Abs(currentStamina - maxStamina) <= Mathf.Epsilon)
         {
+            if(currentStamina == maxStamina)
+            {
+                Debug.Log("stamina's equal");
+            }
+            Debug.Log("If passed");
             currentStamina = 0;
+            Debug.Log("current stamina = 0");
             slider.value = currentStamina;
+            Debug.Log("Slider at 0");
             fill.color = gradient.Evaluate(slider.normalizedValue);
 
             regen = StartCoroutine(RegenStamina());
+            Debug.Log("Couroutine started");
         }
     }
 
@@ -47,8 +55,11 @@ public class StaminaBar : MonoBehaviour
 
         while(currentStamina < maxStamina)
         {
+            Debug.Log("while started");
             currentStamina += maxStamina / 100;
+            Debug.Log("increment");
             slider.value = currentStamina;
+            Debug.Log("slideruptick");
             yield return regenTick;
         }
         

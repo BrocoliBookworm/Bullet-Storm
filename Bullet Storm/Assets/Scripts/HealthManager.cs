@@ -8,11 +8,8 @@ public class HealthManager : MonoBehaviour
     float invulnerableTimer = 0;
     int correctLayer;
     public bool collision = false;
-
     public PlayerController playerControl;
-
     public int collisionDamage = 1;
-
     SpriteRenderer spriteRend;
 
     void Start() 
@@ -52,6 +49,7 @@ public class HealthManager : MonoBehaviour
         if(invulnerableTimer > 0)
         {
             invulnerableTimer -=Time.deltaTime;
+            //StartCoroutine(cameraShake.Shake(.15f, .4f));
         
             if(invulnerableTimer <= 0)
             {
