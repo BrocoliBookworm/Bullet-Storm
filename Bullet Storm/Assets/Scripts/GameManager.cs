@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null; 
     public int score;
     public int addScore;
-    Text scoreText;
+    public Text scoreText;
 
-    /*void Awake() 
+    void Awake() 
     {
         if(instance == null)
         {
@@ -20,13 +20,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); //Removing any chance of duplicates, because we already have the manager assigned somewhere else
         }
+
         score = 0;
-    }*/
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
-        score = 0;
-        scoreText = GetComponent<Text>();
+
     }
 
     // Update is called once per frame

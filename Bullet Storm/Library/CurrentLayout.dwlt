@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 86
+  controlID: 52
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 348}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 87
+  controlID: 34
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -187,8 +187,8 @@ MonoBehaviour:
     y: 372
     width: 644
     height: 359
-  m_MinSize: {x: 102, y: 124}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 106
+  controlID: 53
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -3930
+  m_LastSelectedObjectID: -1278
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -571,9 +571,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a6f0ffff
-      m_LastClickedID: -3930
-      m_ExpandedIDs: d6fbffffbe180000
+      m_SelectedIDs: 6cf3ffff
+      m_LastClickedID: -3220
+      m_ExpandedIDs: d6fbffffb6180000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -635,11 +635,11 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Prefabs/Essentials
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Prefabs/Essentials
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Owner\Documents\GitHub\BulletStorm\Bullet-Storm\Bullet
     Storm
@@ -647,9 +647,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 90.00214}
-    m_SelectedIDs: 800b0000
-    m_LastClickedID: 2944
-    m_ExpandedIDs: 000000009e0a0000b00c00008c110000341300005013000068140000d4140000421500003e160000441600004e16000038170000da170000dc1700008036000000ca9a3b
+    m_SelectedIDs: 52170000
+    m_LastClickedID: 5970
+    m_ExpandedIDs: 000000009c0a0000ac0c000088110000301300004c13000064140000d01400003e1500003a160000401600004a16000032170000d4170000d61700007036000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -677,7 +677,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009e0a0000b00c00008c110000341300005013000068140000d4140000421500003e160000441600004e16000038170000da170000dc17000080360000
+    m_ExpandedIDs: 000000009c0a0000ac0c000088110000301300004c13000064140000d01400003e1500003a160000401600004a16000032170000d4170000d617000070360000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
