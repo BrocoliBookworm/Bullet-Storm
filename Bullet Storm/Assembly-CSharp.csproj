@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\ScrollBackground.cs" />
      <Compile Include="Assets\Scripts\SelfDestruct.cs" />
      <Compile Include="Assets\Scripts\StaminaBar.cs" />
+     <Compile Include="Assets\Scripts\TextUpdate.cs" />
      <Compile Include="Assets\Space Shooter Template FREE\Scripts\Bonus.cs" />
      <Compile Include="Assets\Space Shooter Template FREE\Scripts\Boundary.cs" />
      <Compile Include="Assets\Space Shooter Template FREE\Scripts\DirectMoving.cs" />

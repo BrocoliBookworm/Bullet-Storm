@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float timer;
-    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +27,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
-            gameManager.AddScore();
+            GameManager.Instance().AddScore();
         }
         Destroy(gameObject);
     }

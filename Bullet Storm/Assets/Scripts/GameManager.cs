@@ -5,47 +5,37 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance = null; 
-    public int score;
-    public int addScore;
-    public Text scoreText;
+    private static GameManager _instance; 
+    public TextUpdate textUpdate;
 
+    public static GameManager Instance()
+    {
+        if(_instance == null)
+        {
+            GameObject go = new GameObject("GameManager"); //assign instance to this instance of the class
+            go.AddComponent<GameManager>();
+        }
+
+        return _instance;
+    }
+
+    public int score;
+    private int addScore = 10;
+    Text scoreText;
+    
     void Awake() 
     {
-        if(instance == null)
-        {
-            instance = this; //assign instance to this instance of the class
-        }
-        else if(instance != this) 
-        {
-            Destroy(gameObject); //Removing any chance of duplicates, because we already have the manager assigned somewhere else
-        }
-
-        score = 0;
+        _instance = this;
     }
-    
     // Start is called before the first frame update
     void Start()
     {
-
+        score = 0;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    
     public void AddScore()
     {
         score += addScore;
-        UpdateScore();
-        Debug.Log("Score added");
-    }
-
-    public void UpdateScore()
-    {
-        scoreText.text = "Score: " + score;
-        Debug.Log("Update Ran");
+        textUpdate.UpdateScore();
     }
 }

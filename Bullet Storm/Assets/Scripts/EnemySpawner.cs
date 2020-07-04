@@ -5,9 +5,15 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject EPrefab;
+
+    //Timer
     float enemyRate = 5;
+
+    //Timer to spawning enemy
     float nextEnemy = 1;
-    float spawnDistance = 20f;
+
+    //How far to spawn enemies 
+    float spawnDistance = 25f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,17 +30,20 @@ public class EnemySpawner : MonoBehaviour
         {
             nextEnemy = enemyRate;
             enemyRate *= 0.9f;
+            //Sets a bare minimum timer for spawning in enemies
             if(enemyRate < 2)
             {
                 enemyRate = 2;
             }
 
+            //Creates an offset in a random area in a sphere
             Vector3 offset = Random.onUnitSphere;
 
             offset.z = 0;
             
             offset = offset.normalized * spawnDistance;
 
+            //spawns the enemies
             Instantiate(EPrefab, transform.position + offset, Quaternion.identity);
         }
     }

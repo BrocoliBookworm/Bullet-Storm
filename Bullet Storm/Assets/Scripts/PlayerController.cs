@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
             //If you press the jump key you should get a speed boost
         if(Input.GetButtonDown("Fire2"))
         {
-            if(StaminaBar.instance.regen == null)
+            if(StaminaBar.instance.equalized)
             {
                 StaminaBar.instance.UseStamina();
                 velocity = new Vector3(0, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
