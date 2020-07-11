@@ -64,11 +64,11 @@ public class EnemyController : MonoBehaviour
         }
         if(index == 1)
         {
-            Debug.Log("3");
+
         }
         if(index == 2)
         {
-            Debug.Log("2");
+
         }
     }
 }

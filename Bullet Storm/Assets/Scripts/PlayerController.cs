@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         if(healthSystem.shotHealthPowerUp)
         {
             HealthBar.instance.SetHealth(currentHealth);
+            healthSystem.shotHealthPowerUp = false;
         }
     }
 
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
     }
     void TakeDamage()
     {
+        Debug.Log("Ran Take Damage");
         HealthBar.instance.SetHealth(currentHealth);
         healthSystem.collision = false;
     }

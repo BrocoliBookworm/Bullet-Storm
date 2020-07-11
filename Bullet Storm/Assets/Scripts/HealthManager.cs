@@ -60,7 +60,6 @@ public class HealthManager : MonoBehaviour
                     shotHealthPowerUp = true;
                     currentHealth++;
                     playerControl.currentHealth = currentHealth;
-                    shotHealthPowerUp = false;
                 }
             }
         }
