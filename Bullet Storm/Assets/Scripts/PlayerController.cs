@@ -6,21 +6,19 @@ public class PlayerController : MonoBehaviour
 {
     public float Speed;
     public float dashSpeed; //speed of the dash
-    public int maxHealth = 1;
+    public int maxHealth;
     public int currentHealth;
     Vector3 velocity;
 
-    public HealthBar healthBar;
     public HealthManager healthSystem;
+
+    public PowerUp powerUpSystem;
     public float rotationSpeed;
-    //public Rigidbody2D rb;
-    //Vector2 movement;
 
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
-        //staminaBar.SetMaxStamina(maxRecharge);
+        HealthBar.instance.SetMaxHealth(maxHealth);
     }
 
     void Update()
@@ -66,17 +64,19 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage();
         }
+        if(healthSystem.shotHealthPowerUp)
+        {
+            HealthBar.instance.SetHealth(currentHealth);
+        }
     }
 
     void FixedUpdate() 
     {
 
     }
-
     void TakeDamage()
     {
-        currentHealth -= healthSystem.collisionDamage;
-        healthBar.SetHealth(currentHealth);
+        HealthBar.instance.SetHealth(currentHealth);
         healthSystem.collision = false;
     }
 }

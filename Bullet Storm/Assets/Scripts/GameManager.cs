@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance; 
+    private static GameManager _instance;
     public TextUpdate textUpdate;
+
+    public GameObject thePlayer;
 
     public static GameManager Instance()
     {
@@ -26,11 +28,13 @@ public class GameManager : MonoBehaviour
     void Awake() 
     {
         _instance = this;
+        
     }
     // Start is called before the first frame update
     void Start()
     {
         score = 0;
+        Instantiate(thePlayer, transform.position, Quaternion.identity); 
     }
     
     public void AddScore()

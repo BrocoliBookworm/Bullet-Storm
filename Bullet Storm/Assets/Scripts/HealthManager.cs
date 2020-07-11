@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-    public int health;
+    public int maxHealth;
+    public int currentHealth;
     float invulnerableTimer = 0;
     int correctLayer;
     public bool collision = false;
     public PlayerController playerControl;
     public int collisionDamage = 1;
     SpriteRenderer spriteRend;
+    public bool shotHealthPowerUp = false;
+
+    public EnemyController enemyController;
 
     void Start() 
     {
         correctLayer = gameObject.layer;
         if(gameObject.layer == 8)
         {
-            health = playerControl.maxHealth;
+            maxHealth = playerControl.maxHealth;
+            currentHealth = playerControl.maxHealth;
         }
 
         //Only gets the renderer on the parent object
@@ -34,14 +39,31 @@ public class HealthManager : MonoBehaviour
             }
         }
     }
-    void OnTriggerEnter2D() 
+    void OnTriggerEnter2D(Collider2D other) 
     {
-        health --;
-        collision = true;
+        if(!other.CompareTag("HealthPowerUp"))
+        {
+            currentHealth--;
+            playerControl.currentHealth = currentHealth;
+            collision = true;
 
-        invulnerableTimer = 0.5f;
+            invulnerableTimer = 0.5f;
 
-        gameObject.layer = 10;
+            gameObject.layer = 10;   
+        }
+        else if(other.CompareTag("HealthPowerUp"))
+        {
+            if(gameObject.layer == 8)
+            {
+                if(currentHealth < maxHealth)
+                {
+                    shotHealthPowerUp = true;
+                    currentHealth++;
+                    playerControl.currentHealth = currentHealth;
+                    shotHealthPowerUp = false;
+                }
+            }
+        }
     }
 
     void Update() 
@@ -69,7 +91,7 @@ public class HealthManager : MonoBehaviour
 			}
         }
 
-        if(health <= 0)
+        if(currentHealth <= 0)
         {
             Die();
         }
@@ -77,6 +99,10 @@ public class HealthManager : MonoBehaviour
 
     void Die() 
     {
-        Destroy(gameObject);    
+        Destroy(gameObject);  
+        if(gameObject.layer == 9)
+        {
+            enemyController.RandomDrop();
+        }  
     }
 }

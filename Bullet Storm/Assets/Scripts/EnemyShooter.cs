@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
 {
-    public Transform Firepoint;
+    public Transform firePoint;
     public GameObject bulletPrefab;
     public float bulletForce;
     public float fireDelay;
@@ -35,9 +35,9 @@ public class EnemyShooter : MonoBehaviour
         {
             cooldownTimer = fireDelay;
 
-            GameObject Enemybullet = Instantiate(bulletPrefab, Firepoint.position, Firepoint.rotation); // Creates the bullet
+            GameObject Enemybullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Creates the bullet
             Rigidbody2D rb = Enemybullet.GetComponent<Rigidbody2D>(); //Access the bullets rigidbody2d component
-            rb.AddForce(Firepoint.up * bulletForce,ForceMode2D.Impulse); // Puts force on the bullet        
+            rb.AddForce(firePoint.up * bulletForce,ForceMode2D.Impulse); // Puts force on the bullet        
         }
     }
 }

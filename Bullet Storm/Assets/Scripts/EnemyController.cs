@@ -6,7 +6,14 @@ public class EnemyController : MonoBehaviour
 {
     public float rotationSpeed;
     Transform player;
+
+    private Transform target;
     public float speed;
+
+    public GameObject[] powerUps;
+    private int index;
+    public Transform spawnPoint;
+
 
     // Update is called once per frame
     void Update()
@@ -22,11 +29,11 @@ public class EnemyController : MonoBehaviour
         if(player == null)
         {
             //Find the players ship
-            GameObject go = GameObject.Find("Player"); //go = GameObject
+            target = GameObject.FindWithTag("Player").transform;
             
-            if(go != null)
+            if(target != null)
             {
-                player = go.transform;
+                player = target.transform;
             }
         }
 
@@ -46,5 +53,22 @@ public class EnemyController : MonoBehaviour
         Quaternion desiredRot = Quaternion.Euler(0, 0, zAngle);
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRot, rotationSpeed * Time.deltaTime);
+    }
+
+    public void RandomDrop()
+    {
+        index = Random.Range(0, powerUps.Length);
+        if(index == 0)
+        {
+            Instantiate(powerUps[index], spawnPoint.position, spawnPoint.rotation);
+        }
+        if(index == 1)
+        {
+            Debug.Log("3");
+        }
+        if(index == 2)
+        {
+            Debug.Log("2");
+        }
     }
 }
