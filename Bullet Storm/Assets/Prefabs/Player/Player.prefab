@@ -222,12 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbc5825635ac14f4a9b0a69a111d990c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 12
+  speed: 15
   dashSpeed: 100
   maxHealth: 10
   currentHealth: 0
-  shotHealthPowerUp: 0
-  healthBar: {fileID: 0}
   healthSystem: {fileID: 9060216654535600586}
   powerUpSystem: {fileID: 0}
   rotationSpeed: 240
@@ -280,10 +278,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cfceafe591b3f4438b111ab84e1a9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  maxHealth: 0
+  currentHealth: 0
   collision: 0
   playerControl: {fileID: 9060216654535600591}
   collisionDamage: 1
+  shotHealthPowerUp: 0
+  enemyController: {fileID: 0}
 --- !u!60 &9060216654535600589
 PolygonCollider2D:
   m_ObjectHideFlags: 0

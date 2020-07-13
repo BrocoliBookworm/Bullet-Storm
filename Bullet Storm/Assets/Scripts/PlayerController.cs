@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float Speed;
+    public float speed;
     public float dashSpeed; //speed of the dash
     public int maxHealth;
     public int currentHealth;
     Vector3 velocity;
+    private Rigidbody2D rb2d;
+
+    private Camera mainCamera;
 
     public HealthManager healthSystem;
 
@@ -19,10 +22,13 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = maxHealth;
         HealthBar.instance.SetMaxHealth(maxHealth);
+        rb2d = GetComponent<Rigidbody2D>();
+        mainCamera = FindObjectOfType<Camera>();
     }
 
     void Update()
     {
+        FaceMouse();
         // Rotation Implementation
             //This is very explicit
             // Grabs the rotation quaternion
@@ -50,12 +56,12 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                velocity = new Vector3(0, Input.GetAxis("Vertical") * Speed * Time.deltaTime, 0);
+                velocity = new Vector3(0, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
             }
         }
         else
         {   
-            velocity = new Vector3(0, Input.GetAxis("Vertical") * Speed * Time.deltaTime, 0);
+            velocity = new Vector3(0, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
         }
         pos += rot * velocity;
         transform.position = pos;
@@ -73,12 +79,20 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() 
     {
-
+        rb2d.velocity = velocity;
     }
     void TakeDamage()
     {
-        Debug.Log("Ran Take Damage");
         HealthBar.instance.SetHealth(currentHealth);
         healthSystem.collision = false;
+    }
+
+    void FaceMouse()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+        transform.up = direction;
     }
 }
