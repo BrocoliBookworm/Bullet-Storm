@@ -27,9 +27,13 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
+            Destroy(gameObject);
             GameManager.Instance().AddScore();
         }
-        Destroy(gameObject);
+        else if(other.gameObject.layer == 11)
+        {
+            Debug.Log("hit a powerup");
+        }
     }
 
 }

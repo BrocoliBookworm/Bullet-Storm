@@ -54,34 +54,10 @@ public class StaminaBar : MonoBehaviour
     {
         if(currentStamina >= maxStamina)
         {
-            Debug.Log("If passed");
             currentStamina = 0f;
             equalized = false;
-            Debug.Log("current stamina = 0");
             slider.value = currentStamina;
-            Debug.Log("Slider at 0");
             fill.color = gradient.Evaluate(slider.normalizedValue);
-
-            //regen = StartCoroutine(RegenStamina());
-            //Debug.Log("Couroutine started");
         }
     }
-    /*
-    private IEnumerator RegenStamina()
-    {
-        yield return new WaitForSeconds(2);
-
-        while(currentStamina < maxStamina)
-        {
-            Debug.Log("while started");
-            currentStamina += maxStamina / 100;
-            Debug.Log("increment");
-            slider.value = currentStamina;
-            Debug.Log("slideruptick");
-            yield return regenTick;
-        }
-        
-        regen = null;
-    }
-    */
 }
