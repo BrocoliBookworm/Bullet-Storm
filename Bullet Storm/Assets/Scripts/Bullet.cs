@@ -28,7 +28,12 @@ public class Bullet : MonoBehaviour
         if(other.tag == "Enemy")
         {
             Destroy(gameObject);
+            Debug.Log("Destroyed");
             GameManager.Instance().AddScore();
+        }
+        else if(other.tag == "Player")
+        {
+            Destroy(gameObject);
         }
         else if(other.gameObject.layer == 11)
         {

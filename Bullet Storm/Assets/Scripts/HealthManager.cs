@@ -13,7 +13,6 @@ public class HealthManager : MonoBehaviour
     public int collisionDamage = 1;
     SpriteRenderer spriteRend;
     public bool shotHealthPowerUp = false;
-
     public EnemyController enemyController;
 
     void Start() 
@@ -41,17 +40,7 @@ public class HealthManager : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if(!other.CompareTag("HealthPowerUp"))
-        {
-            currentHealth--;
-            playerControl.currentHealth = currentHealth;
-            collision = true;
-
-            invulnerableTimer = 0.5f;
-
-            gameObject.layer = 10;   
-        }
-        else if(other.CompareTag("HealthPowerUp"))
+        if(other.CompareTag("HealthPowerUp"))
         {
             if(gameObject.layer == 8)
             {
@@ -62,6 +51,24 @@ public class HealthManager : MonoBehaviour
                     playerControl.currentHealth = currentHealth;
                 }
             }
+        }
+        else if(other.CompareTag("Border"))
+        {
+            //Debug.Log("Border hit, healthmanager");
+        }
+        else if(other.CompareTag("SpaceStation"))
+        {
+            //Debug.Log("Space Station hit");
+        }
+        else
+        {
+            currentHealth--;
+            playerControl.currentHealth = currentHealth;
+            collision = true;
+
+            invulnerableTimer = 0.5f;
+
+            gameObject.layer = 10;   
         }
     }
 
