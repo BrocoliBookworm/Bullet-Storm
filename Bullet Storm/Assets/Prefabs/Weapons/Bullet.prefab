@@ -142,5 +142,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 3
-  gameManager: {fileID: 1700709222234035903, guid: 84febc9030191a4438d4311e7e849269,
-    type: 3}

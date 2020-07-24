@@ -58,7 +58,11 @@ public class HealthManager : MonoBehaviour
         }
         else if(other.CompareTag("SpaceStation"))
         {
-            //Debug.Log("Space Station hit");
+            GameManager.Instance().RescueSurvivors();
+        }
+        else if(other.CompareTag("Survivor"))
+        {
+            GameManager.Instance().AddSurvivors();
         }
         else
         {

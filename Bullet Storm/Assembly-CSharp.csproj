@@ -84,10 +84,13 @@
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerShooter.cs" />
      <Compile Include="Assets\Scripts\PowerUp.cs" />
-     <Compile Include="Assets\Scripts\RescueCenter.cs" />
+     <Compile Include="Assets\Scripts\RescueUpdate.cs" />
      <Compile Include="Assets\Scripts\ScrollBackground.cs" />
      <Compile Include="Assets\Scripts\SelfDestruct.cs" />
      <Compile Include="Assets\Scripts\StaminaBar.cs" />
+     <Compile Include="Assets\Scripts\SurvivorController.cs" />
+     <Compile Include="Assets\Scripts\SurvivorUpdate.cs" />
+     <Compile Include="Assets\Scripts\SurvivorWaveSpawner.cs" />
      <Compile Include="Assets\Scripts\TestPlayerControl.cs" />
      <Compile Include="Assets\Scripts\TextUpdate.cs" />
      <Compile Include="Assets\Space Shooter Template FREE\Scripts\Bonus.cs" />

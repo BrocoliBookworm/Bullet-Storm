@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public TextUpdate textUpdate;
+    public SurvivorUpdate survivorUpdate;
+    public RescueUpdate rescueUpdate;
 
     public GameObject thePlayer;
 
@@ -22,18 +24,20 @@ public class GameManager : MonoBehaviour
     }
 
     public int score;
+    public int survivors;
+    public int survivorsSaved;
     private int addScore = 10;
-    Text scoreText;
     
     void Awake() 
     {
         _instance = this;
-        
     }
     // Start is called before the first frame update
     void Start()
     {
         score = 0;
+        survivors = 0;
+        survivorsSaved = 0;
         Instantiate(thePlayer, transform.position, Quaternion.identity); 
     }
     
@@ -41,5 +45,26 @@ public class GameManager : MonoBehaviour
     {
         score += addScore;
         textUpdate.UpdateScore();
+    }
+
+    public void AddSurvivors()
+    {
+        survivors++;
+        survivorUpdate.UpdateSurvivors();
+    }
+
+    public void RescueSurvivors()
+    {
+        if(survivorsSaved == 0)
+        {
+            survivorsSaved = survivors;
+        }
+        else
+        {
+            survivorsSaved += survivors;
+        }
+        survivors = 0;
+        survivorUpdate.UpdateSurvivors();  
+        rescueUpdate.UpdateRescue();
     }
 }

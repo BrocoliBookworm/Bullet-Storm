@@ -17,6 +17,7 @@ TagManager:
   - HealthPowerUp
   - Border
   - SpaceStation
+  - Survivor
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - PowerUp
   - Space Stations
   - Minimap
-  - 
+  - Survivor
   - 
   - 
   - 

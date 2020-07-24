@@ -153,10 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 90
   speed: 8
-  powerUps:
-  - {fileID: 4554842342094609456, guid: 8c87eab4c8d88854a89bb44265f88c2d, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  powerUp: {fileID: 6529488290281929366, guid: b9fefd2400bbbdd418ebdbf386d85966, type: 3}
   spawnPoint: {fileID: 1807453602641373347}
 --- !u!60 &843442714
 PolygonCollider2D:

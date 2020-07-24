@@ -10,8 +10,7 @@ public class EnemyController : MonoBehaviour
     private Transform target;
     public float speed;
 
-    public GameObject[] powerUps;
-    private int index;
+    public GameObject powerUp;
     public Transform spawnPoint;
 
 
@@ -57,18 +56,9 @@ public class EnemyController : MonoBehaviour
 
     public void RandomDrop()
     {
-        index = Random.Range(0, powerUps.Length);
-        if(index == 0)
+        if(Random.value > 0.7)
         {
-            Instantiate(powerUps[index], spawnPoint.position, spawnPoint.rotation);
-        }
-        if(index == 1)
-        {
-
-        }
-        if(index == 2)
-        {
-
+            Instantiate(powerUp, spawnPoint.position, spawnPoint.rotation);
         }
     }
 }

@@ -435,7 +435,10 @@ MonoBehaviour:
   centralFirepoint: {fileID: 9060216654897210858}
   bulletPrefab: {fileID: 5835425506803208816, guid: 73773eec742a11148918c3b345569fe5,
     type: 3}
+  tripleBulletPrefab: {fileID: 836531555358314705, guid: 4e9f7db7853116041abccd38d5f511c3,
+    type: 3}
   bulletForce: 20
+  tripleBulletForce: 20
 --- !u!50 &9060216654535600590
 Rigidbody2D:
   serializedVersion: 4
