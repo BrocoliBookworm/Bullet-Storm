@@ -435,7 +435,7 @@ MonoBehaviour:
   centralFirepoint: {fileID: 9060216654897210858}
   bulletPrefab: {fileID: 5835425506803208816, guid: 73773eec742a11148918c3b345569fe5,
     type: 3}
-  tripleBulletPrefab: {fileID: 836531555358314705, guid: 4e9f7db7853116041abccd38d5f511c3,
+  tripleBulletPrefab: {fileID: 8335964614902759089, guid: b2af351fee2e3c84b932312d63f094e2,
     type: 3}
   bulletForce: 20
   tripleBulletForce: 20

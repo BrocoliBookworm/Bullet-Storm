@@ -46,7 +46,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            velocity = new Vector3(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, Input.GetAxisRaw("Vertical") * speed * Time.deltaTime, 0);
+            velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+            velocity = velocity.normalized * speed * Time.deltaTime;
         }
         pos += velocity;
         transform.position = pos;
