@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     public GameObject powerUp;
     public Transform spawnPoint;
 
-
     // Update is called once per frame
     void Update()
     {

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public TextUpdate textUpdate;
-    public SurvivorUpdate survivorUpdate;
-    public RescueUpdate rescueUpdate;
+    private TextUpdate textUpdate;
+    private SurvivorUpdate survivorUpdate;
+    private RescueUpdate rescueUpdate;
 
     public GameObject thePlayer;
 

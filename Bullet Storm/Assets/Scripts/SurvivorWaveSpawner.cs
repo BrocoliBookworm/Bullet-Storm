@@ -19,6 +19,10 @@ public class SurvivorWaveSpawner : MonoBehaviour
     public Wave[] waves;
     private int nextWave = 0;
 
+    public float survivorSpawnDistance;
+
+
+
     public float timerBetweenWaves = 10f;
     public float waveCountDown;
 
@@ -72,8 +76,13 @@ public class SurvivorWaveSpawner : MonoBehaviour
 
     void SpawnSurvivor(Transform survivor)
     {
+        Vector3 offset = Random.onUnitSphere;
+        offset.z = 0;
+
+        offset = offset.normalized * survivorSpawnDistance;
+
         //Spawn survivors
-        Instantiate(survivor, transform.position, transform.rotation);
+        Instantiate(survivor, transform.position + offset, Quaternion.identity);
         Debug.Log("Spawn survivor" + survivor.name);
     }
 

@@ -16,7 +16,13 @@ public class PlayerController : MonoBehaviour
     public HealthManager healthSystem;
 
     public PowerUp powerUpSystem;
-    public float rotationSpeed;
+
+    public float maxHeight;
+    public float minHeight;
+    public float leftDistance;
+    public float rightDistance;
+
+    // public Vector2 movement;
 
     void Start()
     {
@@ -29,6 +35,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         FaceMouse();
+        
+        // movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         // Movement Implementation
             // Returns a float from -1 to 1
@@ -62,8 +70,9 @@ public class PlayerController : MonoBehaviour
             HealthBar.instance.SetHealth(currentHealth);
             healthSystem.shotHealthPowerUp = false;
         }
-    }
 
+        CheckBoundaries();
+    }
     void TakeDamage()
     {
         HealthBar.instance.SetHealth(currentHealth);
@@ -77,5 +86,17 @@ public class PlayerController : MonoBehaviour
 
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = direction;
+    }
+
+    public void CheckBoundaries()
+    {
+        if(transform.position.y > maxHeight || transform.position.y < minHeight || transform.position.x > rightDistance || transform.position.x < leftDistance)
+        {
+            BorderWarning.instance.EnterArea();
+        }
+        else if(transform.position.y < maxHeight || transform.position.y > minHeight || transform.position.x < rightDistance || transform.position.x > leftDistance)
+        {
+            BorderWarning.instance.ExitArea();
+        }
     }
 }

@@ -113,6 +113,11 @@ public class HealthManager : MonoBehaviour
         if(gameObject.layer == 9)
         {
             enemyController.RandomDrop();
+            if(gameObject.tag == "TurretEnemy")
+            {
+                Debug.Log("health turret check");
+                GameManager.Instance().AddScore();
+            }
         }  
     }
 }

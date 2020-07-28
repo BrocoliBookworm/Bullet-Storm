@@ -6,6 +6,7 @@ public class EnemyShooter : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public GameObject turretBulletPrefab;
     public float bulletForce;
     public float fireDelay;
 
@@ -34,10 +35,23 @@ public class EnemyShooter : MonoBehaviour
         if(cooldownTimer <= 0 && player != null && Vector3.Distance(transform.position, player.position) < 10)
         {
             cooldownTimer = fireDelay;
-
-            GameObject Enemybullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Creates the bullet
-            Rigidbody2D rb = Enemybullet.GetComponent<Rigidbody2D>(); //Access the bullets rigidbody2d component
-            rb.AddForce(firePoint.up * bulletForce,ForceMode2D.Impulse); // Puts force on the bullet        
+            if(gameObject.tag == "Enemy")
+            {
+                GameObject enemyBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Creates the bullet
+                Rigidbody2D rb = enemyBullet.GetComponent<Rigidbody2D>(); //Access the bullets rigidbody2d component
+                rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse); // Puts force on the bullet   
+            }
+            else if(gameObject.tag == "TurretEnemy")
+            {
+                Debug.Log("turret");
+                GameObject enemyBullet = Instantiate(turretBulletPrefab, firePoint.position, firePoint.rotation);
+                Rigidbody2D[] rb = enemyBullet.GetComponentsInChildren<Rigidbody2D>();
+                for(int i = 0; i < 12; i++)
+                {
+                    Debug.Log("for loop ");
+                    rb[i].AddForce(rb[i].transform.up * bulletForce, ForceMode2D.Impulse);
+                }
+            }
         }
     }
 }

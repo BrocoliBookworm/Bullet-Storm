@@ -61,6 +61,19 @@
      <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
      <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
      <Compile Include="Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\Bomb.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\ColorExtensions.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\DrawStuff.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\DropBomb.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\DropSand.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\GoBoom.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\MakeFire.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\PixParticle.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\PixSurfDemo.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\SnowFall.cs" />
+     <Compile Include="Assets\PixelSurface\DemoScripts\StatsDisplay.cs" />
+     <Compile Include="Assets\PixelSurface\PixelSurface\LivePixel.cs" />
+     <Compile Include="Assets\PixelSurface\PixelSurface\PixelSurface.cs" />
      <Compile Include="Assets\PowerUp\Scripts\CustomizablePowerUp.cs" />
      <Compile Include="Assets\PowerUp\Scripts\PowerUpManager.cs" />
      <Compile Include="Assets\PowerUp\Scripts\PowerUpRotation.cs" />
@@ -70,7 +83,6 @@
      <Compile Include="Assets\ProgressBar\Scene\Demo.cs" />
      <Compile Include="Assets\ProgressBar\Script\ProgressBar.cs" />
      <Compile Include="Assets\ProgressBar\Script\ProgressBarCircle.cs" />
-     <Compile Include="Assets\Scripts\BorderAreaTrigger.cs" />
      <Compile Include="Assets\Scripts\BorderWarning.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />

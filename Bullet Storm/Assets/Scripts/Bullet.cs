@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public float timer;
 
+    private float time = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,12 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
             GameManager.Instance().AddScore();
+        }
+        else if(other.tag == "TurretEnemy")
+        {
+            Physics.IgnoreLayerCollision(9, 9, true);
+            Debug.Log("hit turret");
+            Destroy(gameObject);
         }
         else if(other.tag == "Player")
         {

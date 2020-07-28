@@ -21,12 +21,10 @@ public class PlayerShooter : MonoBehaviour
             if(GameManager.Instance().survivors < 10)
             {
                 RegularShoot();
-                Debug.Log("regular shot");
             }
             else if(GameManager.Instance().survivors >= 10 && GameManager.Instance().survivors < 20)
             {
                 TripleShot();
-                Debug.Log("triple shot");
             }
             /*else if(GameManager.Instance().survivors >= 20)
             {
@@ -46,7 +44,6 @@ public class PlayerShooter : MonoBehaviour
     {
         GameObject tripleBullet = Instantiate(tripleBulletPrefab, centralFirepoint.position, centralFirepoint.rotation);
         Rigidbody2D[] rb = tripleBullet.GetComponentsInChildren<Rigidbody2D>();
-        Transform[] childTransform = tripleBullet.GetComponentsInChildren<Transform>();
         for(int i = 0; i < 3; i++)
         {
             rb[i].AddForce(rb[i].transform.up * bulletForce, ForceMode2D.Impulse);

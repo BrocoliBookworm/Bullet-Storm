@@ -2,21 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BorderWarning : MonoBehaviour
 {
     public static BorderWarning instance;
     
-    public bool trigger = false;
-
     private float timer = 10f;
 
-    public Text timerText;
+    private bool trigger;
+
+    public TextMeshProUGUI timerText;
     public GameObject warningUI;
+
+    public PlayerController playerControl;
+
 
     void Awake() 
     {
-        instance = this;    
+        instance = this;
+    }
+
+    void Start()
+    {
+        timerText = GetComponent<TextMeshProUGUI>();  
     }
 
     void Update() 
@@ -24,7 +33,9 @@ public class BorderWarning : MonoBehaviour
         if(trigger == true)
         {
             timer -= Time.deltaTime;
+            Debug.Log("timer going down");
             timerText.text = timer.ToString("F1");
+            Debug.Log("Timer text called");
 
             if(timer <= 0)
             {

@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SurvivorUpdate : MonoBehaviour
 {
-    Text survivorOnBoardText;
+    TextMeshProUGUI survivorOnBoardText;
     // Start is called before the first frame update
     void Start()
     {
-        survivorOnBoardText = GetComponent<Text>();
+        survivorOnBoardText = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame

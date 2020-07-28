@@ -18,6 +18,7 @@ TagManager:
   - Border
   - SpaceStation
   - Survivor
+  - TurretEnemy
   layers:
   - Default
   - TransparentFX
