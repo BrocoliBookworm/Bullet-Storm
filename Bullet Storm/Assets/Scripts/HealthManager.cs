@@ -69,14 +69,20 @@ public class HealthManager : MonoBehaviour
         }
         else if(other.CompareTag("Survivor") && gameObject.tag == "KidnapEnemy")
         {
-            kidnapEnemyController.success = true;
-            Destroy(other.gameObject);
+            if(kidnapEnemyController.success == true)
+            {
+                return;
+            }
+            else
+            {
+                kidnapEnemyController.success = true;
+                Destroy(other.gameObject);
+            }
         }
         else
         {
             if(gameObject.layer == 8)
             {
-                Debug.Log("gameobject player");
                 currentHealth--;
                 playerControl.currentHealth = currentHealth;
 

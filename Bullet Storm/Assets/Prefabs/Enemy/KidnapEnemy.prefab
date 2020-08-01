@@ -167,9 +167,9 @@ MonoBehaviour:
   rotationSpeed: 125
   survivor: {fileID: 0}
   target: {fileID: 0}
-  warpEastTarget: {fileID: 5434067712828439189, guid: 418d251aa5e6aa44fbc21447310a8fc6,
+  warpEastTarget: {fileID: 1058004959633999927, guid: 43379b3322c03034d947c38222f340c1,
     type: 3}
-  warpWestTarget: {fileID: 4928922901452991819, guid: 43379b3322c03034d947c38222f340c1,
+  warpWestTarget: {fileID: 5655448974596023900, guid: cd945ee274ee80c418f6b9476735bf23,
     type: 3}
   speed: 18
   survivorObject: {fileID: 5225996827943069785, guid: 551a890659578c2418a388f61ee00ad9,

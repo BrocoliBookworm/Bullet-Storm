@@ -75,7 +75,7 @@ public class KidnapEnemyController : MonoBehaviour
         Instantiate(survivorObject, spawnPoint.position, spawnPoint.rotation);
     }
 
-    void OnCollisionEnter2D(Collision2D other) 
+    void OnTriggerEnter2D(Collider2D other) 
     {
         if(other.gameObject.layer == 15)
         {
