@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &512965970
 Transform:
   m_ObjectHideFlags: 0
@@ -9685,6 +9685,9 @@ MonoBehaviour:
     type: 3}
   tripleBulletPrefab: {fileID: 8335964614902759089, guid: b2af351fee2e3c84b932312d63f094e2,
     type: 3}
+  explosiveShotPrefab: {fileID: 6748284547387223452, guid: b532924e29cf42e4fac79a6b40877974,
+    type: 3}
+  explosiveTimer: 5
   bulletForce: 20
 --- !u!50 &9060216654535600590
 Rigidbody2D:
@@ -9726,6 +9729,7 @@ MonoBehaviour:
   collisionDamage: 1
   shotHealthPowerUp: 0
   enemyController: {fileID: 0}
+  kidnapEnemyController: {fileID: 0}
 --- !u!60 &9060216654535600589
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float rotationSpeed;
-    Transform player;
+    public Transform player;
 
-    private Transform target;
+    public Transform target;
     public float speed;
 
     public GameObject powerUp;

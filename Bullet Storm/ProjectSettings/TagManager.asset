@@ -19,6 +19,8 @@ TagManager:
   - SpaceStation
   - Survivor
   - TurretEnemy
+  - KidnapEnemy
+  - ExplosiveShot
   layers:
   - Default
   - TransparentFX
@@ -35,7 +37,7 @@ TagManager:
   - Space Stations
   - Minimap
   - Survivor
-  - 
+  - Warp
   - 
   - 
   - 

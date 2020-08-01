@@ -14,6 +14,7 @@ public class HealthManager : MonoBehaviour
     SpriteRenderer spriteRend;
     public bool shotHealthPowerUp = false;
     public EnemyController enemyController;
+    public KidnapEnemyController kidnapEnemyController;
 
     void Start() 
     {
@@ -40,10 +41,16 @@ public class HealthManager : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other) 
     {
+        if(gameObject.tag == other.tag)
+        {
+            return;
+        }
+
         if(other.CompareTag("HealthPowerUp"))
         {
             if(gameObject.layer == 8)
             {
+                FindObjectOfType<AudioManager>().Play("PowerUpSound");
                 if(currentHealth < maxHealth)
                 {
                     shotHealthPowerUp = true;
@@ -52,27 +59,42 @@ public class HealthManager : MonoBehaviour
                 }
             }
         }
-        else if(other.CompareTag("Border"))
-        {
-            //Debug.Log("Border hit, healthmanager");
-        }
         else if(other.CompareTag("SpaceStation"))
         {
             GameManager.Instance().RescueSurvivors();
         }
-        else if(other.CompareTag("Survivor"))
+        else if(other.CompareTag("Survivor") && gameObject.tag == "Player")
         {
             GameManager.Instance().AddSurvivors();
         }
+        else if(other.CompareTag("Survivor") && gameObject.tag == "KidnapEnemy")
+        {
+            kidnapEnemyController.success = true;
+            Destroy(other.gameObject);
+        }
         else
         {
-            currentHealth--;
-            playerControl.currentHealth = currentHealth;
-            collision = true;
+            if(gameObject.layer == 8)
+            {
+                Debug.Log("gameobject player");
+                currentHealth--;
+                playerControl.currentHealth = currentHealth;
 
-            invulnerableTimer = 0.5f;
+                collision = true;
 
-            gameObject.layer = 10;   
+                invulnerableTimer = 0.5f;
+
+                gameObject.layer = 10;  
+            }
+
+            if(gameObject.layer == 9 && other.CompareTag("ExplosiveShot"))
+            {
+                currentHealth = currentHealth - 3;
+            }
+            else
+            {
+                currentHealth--;
+            }
         }
     }
 
@@ -81,7 +103,6 @@ public class HealthManager : MonoBehaviour
         if(invulnerableTimer > 0)
         {
             invulnerableTimer -=Time.deltaTime;
-            //StartCoroutine(cameraShake.Shake(.15f, .4f));
         
             if(invulnerableTimer <= 0)
             {
@@ -103,21 +124,46 @@ public class HealthManager : MonoBehaviour
 
         if(currentHealth <= 0)
         {
+            if(gameObject.layer == 8)
+            {
+                Debug.Log("player layer");
+                Destroy(gameObject);
+                FindObjectOfType<AudioManager>().Play("PlayerDeath");
+                GameManager.Instance().EndGame();
+            }
             Die();
         }
     }
 
     void Die() 
     {
-        Destroy(gameObject);  
         if(gameObject.layer == 9)
         {
-            enemyController.RandomDrop();
+            FindObjectOfType<AudioManager>().Play("EnemyDeath");
+            Destroy(gameObject);
+            if(gameObject.tag == "KidnapEnemy")
+            {
+                if(kidnapEnemyController.success)
+                {
+                    kidnapEnemyController.SurvivorDrop();
+                }
+            } 
+            else
+            {
+                enemyController.RandomDrop();
+            }
+
             if(gameObject.tag == "TurretEnemy")
             {
-                Debug.Log("health turret check");
                 GameManager.Instance().AddScore();
             }
-        }  
+        }    
+
+        // if(gameObject.layer == 8)
+        // {
+        //     Debug.Log("player layer");
+        //     GameManager.Instance().EndGame();
+        //     Destroy(gameObject);
+        // }  
     }
 }

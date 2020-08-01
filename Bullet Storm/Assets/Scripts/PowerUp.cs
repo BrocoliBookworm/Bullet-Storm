@@ -5,6 +5,16 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     public GameObject healthPickupEffect;
+    public float timer;
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
+        if(timer <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other) 
    {

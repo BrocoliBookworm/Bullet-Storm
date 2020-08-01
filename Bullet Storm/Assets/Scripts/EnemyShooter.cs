@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyShooter : MonoBehaviour
 {
     public Transform firePoint;
+    public Transform[] firePoints;
     public GameObject bulletPrefab;
     public GameObject turretBulletPrefab;
     public float bulletForce;
@@ -43,14 +44,23 @@ public class EnemyShooter : MonoBehaviour
             }
             else if(gameObject.tag == "TurretEnemy")
             {
-                Debug.Log("turret");
-                GameObject enemyBullet = Instantiate(turretBulletPrefab, firePoint.position, firePoint.rotation);
-                Rigidbody2D[] rb = enemyBullet.GetComponentsInChildren<Rigidbody2D>();
-                for(int i = 0; i < 12; i++)
+                for(int i = 0; i < firePoints.Length; i++)
                 {
-                    Debug.Log("for loop ");
-                    rb[i].AddForce(rb[i].transform.up * bulletForce, ForceMode2D.Impulse);
-                }
+                    Vector3 v = (firePoints[i].transform.position - transform.position).normalized;
+                    Quaternion rot = Quaternion.FromToRotation(Vector3.up, v); //research this
+                    GameObject enemyBullet = Instantiate(bulletPrefab, firePoints[i].position, rot);
+                    enemyBullet.tag = gameObject.tag;
+                    enemyBullet.GetComponent<Bullet>().velocity = v * bulletForce;
+                } 
+                // GameObject enemyBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                // enemyBullet.tag = gameObject.tag;
+                // enemyBullet.GetComponent<Bullet>().velocity = (player.position - transform.position).normalized * bulletForce;
+
+                // Rigidbody2D[] rb = enemyBullet.GetComponentsInChildren<Rigidbody2D>();
+                // for(int i = 0; i < rb.Length; i++)
+                // {
+                //     //rb[i].AddForce((transform.position - player.position).normalized * bulletForce, ForceMode2D.Impulse);
+                // }
             }
         }
     }

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject thePlayer;
 
+    public bool playing = false;
+
     public static GameManager Instance()
     {
         if(_instance == null)
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playing = true;
         score = 0;
         survivors = 0;
         survivorsSaved = 0;
@@ -66,5 +69,11 @@ public class GameManager : MonoBehaviour
         survivors = 0;
         survivorUpdate.UpdateSurvivors();  
         rescueUpdate.UpdateRescue();
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("GAME OVER");
+        playing = false;
     }
 }

@@ -6,12 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public float dashSpeed; //speed of the dash
+
+    private float survivorAtTen = 0.75f;
+
+    private float survivorAtTwenty = 0.5f;
+
     public int maxHealth;
     public int currentHealth;
     Vector3 velocity;
-    private Rigidbody2D rb2d;
-
-    private Camera mainCamera;
+    // private Rigidbody2D rb2d;
 
     public HealthManager healthSystem;
 
@@ -28,8 +31,8 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = maxHealth;
         HealthBar.instance.SetMaxHealth(maxHealth);
-        rb2d = GetComponent<Rigidbody2D>();
-        mainCamera = FindObjectOfType<Camera>();
+        // rb2d = GetComponent<Rigidbody2D>();
+        // mainCamera = FindObjectOfType<Camera>();
     }
 
     void Update()
@@ -44,18 +47,32 @@ public class PlayerController : MonoBehaviour
         
 
         //If you press the jump key you should get a speed boost
-        if(Input.GetButtonDown("Fire2"))
+        if(Input.GetButtonDown("Fire3"))
         {
             if(StaminaBar.instance.equalized)
             {
                 StaminaBar.instance.UseStamina();
                 velocity = new Vector3(0, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
+                Debug.Log("dash");
             }
+        }
+        else if(GameManager.Instance().survivors >= 10)
+        {
+            velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+            velocity = velocity.normalized * speed * survivorAtTen * Time.deltaTime;
+            Debug.Log("10");
+        }
+        else if(GameManager.Instance().survivors >= 20)
+        {
+            velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+            velocity = velocity.normalized * speed * survivorAtTwenty * Time.deltaTime;
+            Debug.Log("20");
         }
         else
         {
             velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
             velocity = velocity.normalized * speed * Time.deltaTime;
+            Debug.Log("normal");
         }
         pos += velocity;
         transform.position = pos;
@@ -92,11 +109,11 @@ public class PlayerController : MonoBehaviour
     {
         if(transform.position.y > maxHeight || transform.position.y < minHeight || transform.position.x > rightDistance || transform.position.x < leftDistance)
         {
-            BorderWarning.instance.EnterArea();
+            BorderControl.instance.EnterArea();
         }
         else if(transform.position.y < maxHeight || transform.position.y > minHeight || transform.position.x < rightDistance || transform.position.x > leftDistance)
         {
-            BorderWarning.instance.ExitArea();
+            BorderControl.instance.ExitArea();
         }
     }
 }

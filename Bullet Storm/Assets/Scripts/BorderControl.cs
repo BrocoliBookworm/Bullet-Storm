@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BorderWarning : MonoBehaviour
+public class BorderControl : MonoBehaviour
 {
-    public static BorderWarning instance;
+    public static BorderControl instance;
     
     private float timer = 10f;
 
@@ -25,7 +25,7 @@ public class BorderWarning : MonoBehaviour
 
     void Start()
     {
-        timerText = GetComponent<TextMeshProUGUI>();  
+  
     }
 
     void Update() 
@@ -39,8 +39,9 @@ public class BorderWarning : MonoBehaviour
 
             if(timer <= 0)
             {
-                print("Dead");
                 trigger = false;
+                timer = 0;
+                GameManager.Instance().EndGame();
             }
         }
     }
