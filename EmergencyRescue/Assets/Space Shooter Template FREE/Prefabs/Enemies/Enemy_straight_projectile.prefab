@@ -94,7 +94,10 @@ MonoBehaviour:
   Projectile: {fileID: 1728936453619090, guid: 9610b32634c0355409b4b5991571a66b, type: 2}
   destructionVFX: {fileID: 1280240331523082, guid: 45ae5851ef2832044bba82850372d67b,
     type: 2}
-  hitEffect: {fileID: 1256001557233130, guid: 2dd0bdb7830e6644da169b32252dca96, type: 2}
+  hitRayEffect: {fileID: 1256001557233130, guid: 2dd0bdb7830e6644da169b32252dca96,
+    type: 2}
+  isPooled: 1
+  scoreReward: 10
   shotChance: 10
   shotTimeMin: 1
   shotTimeMax: 3
@@ -148,8 +151,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1152134415
-  m_SortingLayer: 4
+  m_SortingLayerID: -1908925011
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3c6d6674bfcb5ac498628dff731a28f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

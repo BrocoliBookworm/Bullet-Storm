@@ -28,7 +28,7 @@ public class EnemyController : HealthManager
 
         if(other.gameObject.layer == 8)
         {
-            if(!other.CompareTag("ExplosiveShot"))
+            if(!other.gameObject.GetComponent<ExplodingBullet>())
             {
                 TakeDamage();
             }

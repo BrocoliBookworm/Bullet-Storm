@@ -9,7 +9,11 @@ public class PlayerShooter : MonoBehaviour
     public GameObject tripleBulletPrefab;
     public GameObject explosiveShotPrefab;
 
-    public float explosiveTimer;
+    public float reloadTimer = 0.1f;
+
+    public bool shotAvailable = true;
+
+    private float explosiveTimer = 5f;
     private bool explosiveAvailable = false;
     public float bulletForce;
 
@@ -21,20 +25,26 @@ public class PlayerShooter : MonoBehaviour
     void Update()
     {
         ExplosiveShotTimer();
+        Reload();
 
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1"))
         {
-            if(GameManager.Instance().survivors < 10)
+            if(shotAvailable)
             {
-                RegularShoot();
-            }
-            else if(GameManager.Instance().survivors >= 10)
-            {
-                TripleShot();
+                if(GameManager.Instance().survivors < 10)
+                {
+                    RegularShoot();
+                    shotAvailable = false;
+                }
+                else if(GameManager.Instance().survivors >= 10)
+                {
+                    TripleShot();
+                    shotAvailable = false;
+                }
             }
         }
 
-        if(Input.GetButtonDown("Fire2"))
+        if(Input.GetButton("Fire2"))
         {
             if(GameManager.Instance().survivors >= 20)
             {
@@ -43,6 +53,16 @@ public class PlayerShooter : MonoBehaviour
                     ExplosiveShot();
                 }
             }
+        }
+    }
+
+    void Reload()
+    {
+        reloadTimer -= Time.deltaTime;
+        if(reloadTimer <= 0)
+        {
+            reloadTimer = 0.1f;
+            shotAvailable = true;
         }
     }
 

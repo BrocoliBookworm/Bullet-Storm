@@ -49,7 +49,10 @@ public class FollowThePath : MonoBehaviour {
                     currentPathPercent = 0;
                 else
                 {
-                    Destroy(gameObject);           
+                    if (GetComponent<Enemy>().isPooled)        
+                        gameObject.SetActive(false);
+                    else
+                        Destroy(gameObject);           
                 }
             }
         }
@@ -93,4 +96,6 @@ public class FollowThePath : MonoBehaviour {
         }
         return (newPathPos);
     }
+    
+
 }

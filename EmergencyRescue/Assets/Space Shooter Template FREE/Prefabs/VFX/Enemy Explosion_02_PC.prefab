@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4935310184550582}
-  - component: {fileID: 114812019831976894}
+  - component: {fileID: 114880597451886654}
   m_Layer: 0
   m_Name: Enemy Explosion_02_PC
   m_TagString: Untagged
@@ -164,7 +164,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114812019831976894
+--- !u!114 &114880597451886654
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -172,10 +172,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1981774452263784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a8515ff1b32ecb498437becf714b57d, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionTime: 2
 --- !u!198 &198002659224382848
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -13867,8 +13866,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 738997965
-  m_SortingLayer: 7
+  m_SortingLayerID: 885116261
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

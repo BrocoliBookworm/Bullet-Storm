@@ -60,7 +60,10 @@ public class Wave : MonoBehaviour {
         for (int i = 0; i < count; i++) 
         {
             GameObject newEnemy;
-            newEnemy = Instantiate(enemy, enemy.transform.position, Quaternion.identity);
+            if (enemy.GetComponent<Enemy>().isPooled)  
+                newEnemy = PoolingController.instance.GetPoolingObject(enemy);
+            else
+                newEnemy = Instantiate(enemy, enemy.transform.position, Quaternion.identity);
             FollowThePath followComponent = newEnemy.GetComponent<FollowThePath>(); 
             followComponent.path = pathPoints;         
             followComponent.speed = speed;        
@@ -71,6 +74,7 @@ public class Wave : MonoBehaviour {
             enemyComponent.shotChance = shooting.shotChance; 
             enemyComponent.shotTimeMin = shooting.shotTimeMin; 
             enemyComponent.shotTimeMax = shooting.shotTimeMax;
+            StartCoroutine(enemyComponent.ActivateShooting()); 
             newEnemy.SetActive(true);      
             yield return new WaitForSeconds(timeBetween); 
         }
@@ -106,6 +110,8 @@ public class Wave : MonoBehaviour {
             Gizmos.DrawLine(currentPositions, previosPositions);
             previosPositions = currentPositions;
         }
+
+
     }
 
     Vector3 Interpolate(Vector3[] path, float t) 

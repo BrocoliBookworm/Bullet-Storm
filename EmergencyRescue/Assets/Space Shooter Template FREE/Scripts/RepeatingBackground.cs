@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// This script attaches to ‘Background’ object, and would move it up if the object went down below the viewport border. 

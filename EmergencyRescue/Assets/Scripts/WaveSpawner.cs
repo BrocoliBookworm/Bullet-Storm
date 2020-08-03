@@ -42,6 +42,16 @@ public class WaveSpawner : MonoBehaviour
         {
             Debug.LogError("No spawn points referenced");
         }
+        
+        if(kidnapEnemySpawnPoints.Length == 0)
+        {
+            Debug.LogError("No kidnap enemy spawn points referenced");
+        }
+
+        if(turretEnemySpawnPoints.Length == 0)
+        {
+            Debug.LogError("No turret enemy spawn points referenced");
+        }
     }
 
     void Update()
@@ -70,11 +80,14 @@ public class WaveSpawner : MonoBehaviour
         // Debug.Log("Spawning wave: " + _wave.name);
         state = spawnState.SPAWNING;
 
+        Transform _sp = survivorSpawnPoints[Random.Range(0, survivorSpawnPoints.Length)];
+        Transform _spForTurret = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
+
         // Spawn
         for(int i = 0; i < _wave.count; i++)
         {
-            SpawnSurvivor(_wave.survivor);
-            SpawnTurretEnemy(_wave.turretEnemy);
+            SpawnSurvivor(_wave.survivor, _sp);
+            SpawnTurretEnemy(_wave.turretEnemy, _spForTurret);
             SpawnKidnapEnemy(_wave.kidnapEnemy);
             yield return new WaitForSeconds(1f/_wave.rate);
         }
@@ -100,9 +113,9 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    void SpawnSurvivor(Transform survivor)
+    void SpawnSurvivor(Transform survivor, Transform spawnlocation)
     {
-        Transform _sp = survivorSpawnPoints[Random.Range(0, survivorSpawnPoints.Length)];
+        // Transform _sp = survivorSpawnPoints[Random.Range(0, survivorSpawnPoints.Length)];
 
         Vector3 offset = Random.onUnitSphere;
         offset.z = 0;
@@ -110,12 +123,12 @@ public class WaveSpawner : MonoBehaviour
         offset = offset.normalized * survivorSpawnDistance;
 
         //Spawn survivors
-        Instantiate(survivor, _sp.position + offset, _sp.rotation);
+        Instantiate(survivor, survivor.position + offset, survivor.rotation);
     }
 
-    void SpawnTurretEnemy(Transform turret)
+    void SpawnTurretEnemy(Transform turret, Transform spawnlocation)
     {
-        Transform _sp = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
+        // Transform _sp = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
 
         Vector3 offset = Random.onUnitSphere;
         offset.z = 0;
@@ -123,7 +136,7 @@ public class WaveSpawner : MonoBehaviour
         offset = offset.normalized * survivorSpawnDistance;
 
         //Spawning
-        Instantiate(turret, _sp.position + offset, _sp.rotation);
+        Instantiate(turret, turret.position + offset, turret.rotation);
     }
 
     void SpawnKidnapEnemy(Transform kidnapEnemy)

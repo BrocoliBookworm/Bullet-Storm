@@ -10,6 +10,9 @@ public class VisualEffect : MonoBehaviour {
     [Tooltip("the time after object will be destroyed")]
     public float destructionTime;
 
+    [Tooltip("whether 'pooling' is used or not")]
+    public bool isPooled;
+
     private void OnEnable()
     {
         StartCoroutine(Destruction()); //launching the timer of destruction
@@ -18,6 +21,9 @@ public class VisualEffect : MonoBehaviour {
     IEnumerator Destruction() //wait for the estimated time, and destroying or deactivating the object
     {
         yield return new WaitForSeconds(destructionTime); 
-        Destroy(gameObject);
+        if (isPooled)                       
+            gameObject.SetActive(false); 
+        else
+            Destroy(gameObject);
     }
 }

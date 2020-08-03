@@ -41,15 +41,15 @@ public class TurretEnemyController : EnemyController
             return; //Try next frame
         }
 
-        //Here we know there is a player. Go get it
-        Vector3 dir = player.position - transform.position;
-        dir.Normalize();
+        // //Here we know there is a player. Go get it
+        // Vector3 dir = player.position - transform.position;
+        // dir.Normalize();
 
-        float zAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+        // float zAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
 
-        Quaternion desiredRot = Quaternion.Euler(0, 0, zAngle);
+        // Quaternion desiredRot = Quaternion.Euler(0, 0, zAngle);
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRot, rotationSpeed * Time.deltaTime);
+        // transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRot, rotationSpeed * Time.deltaTime);
     }
 
     public override void Die()

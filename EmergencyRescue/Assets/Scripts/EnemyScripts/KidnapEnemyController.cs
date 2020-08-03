@@ -37,7 +37,7 @@ public class KidnapEnemyController : EnemyController
 
         if(other.gameObject.layer == 8)
         {
-            if(!other.CompareTag("ExplosiveShot"))
+            if(!other.gameObject.GetComponent<ExplodingBullet>())
             {
                 TakeDamage();
             }
@@ -77,28 +77,22 @@ public class KidnapEnemyController : EnemyController
         {
             if(success != true)
             {
-                target = GameObject.FindWithTag("Survivor").transform;
-                //Get rid of this entirely and search by component (survivor component)
-                    //Find OBJECTS of type and then survivorcontroller
+                var target = FindObjectOfType<SurvivorController>();
 
                 if(target != null)
                 {
-                    // Debug.Log("survivor");
                     survivor = target.transform;
                 }
             }
 
             if(success == true)
             {
-                // Debug.Log("success is true");
                 if(Random.value > 0.5)
                 {
-                    // Debug.Log("east");
                     survivor = warpEastTarget.transform;
                 }
                 else
                 {
-                    // Debug.Log("west");
                     survivor = warpWestTarget.transform;
                 }
             }

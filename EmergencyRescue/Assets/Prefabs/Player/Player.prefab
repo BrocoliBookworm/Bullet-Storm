@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &512965970
 Transform:
   m_ObjectHideFlags: 0
@@ -9633,7 +9633,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -126
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9686,7 +9686,6 @@ MonoBehaviour:
     type: 3}
   explosiveShotPrefab: {fileID: 6748284547387223452, guid: b532924e29cf42e4fac79a6b40877974,
     type: 3}
-  explosiveTimer: 5
   bulletForce: 20
 --- !u!50 &9060216654535600590
 Rigidbody2D:

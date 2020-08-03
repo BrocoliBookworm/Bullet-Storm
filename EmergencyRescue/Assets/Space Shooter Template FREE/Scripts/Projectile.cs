@@ -17,6 +17,9 @@ public class Projectile : MonoBehaviour {
     [Tooltip("Whether the projectile is destroyed in the collision, or not")]
     public bool destroyedByCollision;
 
+    [Tooltip("Whether the projectile is using 'pooling', or not")]
+    public bool isPooled;
+
     private void OnTriggerEnter2D(Collider2D collision) //when a projectile collides with another object
     {
         if (enemyBullet && collision.tag == "Player") //if anoter object is 'player' or 'enemy sending the command of receiving the damage
@@ -33,9 +36,12 @@ public class Projectile : MonoBehaviour {
         }
     }
 
-    void Destruction() 
+    void Destruction()  //if the object is using 'pooling' disactivate it. If it isn't destroy it
     {
-        Destroy(gameObject);
+        if (isPooled)
+            gameObject.SetActive(false);
+        else
+            Destroy(gameObject);
     }
 }
 

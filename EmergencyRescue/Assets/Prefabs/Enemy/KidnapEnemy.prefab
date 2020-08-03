@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3309208971291476686}
   - component: {fileID: 3309208971291476687}
   - component: {fileID: 3309208971291476684}
-  - component: {fileID: 3309208971291476685}
   - component: {fileID: 3309208971291476674}
   - component: {fileID: 3309208971291476675}
   m_Layer: 9
@@ -30,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3309208971291476672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.69, y: 2.42, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 3309208972256407900}
   - {fileID: 3309208971496913416}
@@ -74,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9f35504fe7e111448964746d9af09a08, type: 3}
-  m_Color: {r: 0, g: 0.17717361, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 750cb2d9e376df54d98b91bcadf45e60, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -106,26 +105,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3309208971291476685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3309208971291476672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cfceafe591b3f4438b111ab84e1a9c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1
-  currentHealth: 1
-  collision: 0
-  playerControl: {fileID: 0}
-  collisionDamage: 1
-  shotHealthPowerUp: 0
-  enemyController: {fileID: 0}
-  kidnapEnemyController: {fileID: 3309208971291476675}
 --- !u!61 &3309208971291476674
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 10.24, y: 10.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -164,17 +143,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049c4239280f2654c8c85da6c5c0e6cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 1
+  correctLayer: 0
+  spriteRend: {fileID: 0}
   rotationSpeed: 125
-  survivor: {fileID: 0}
+  player: {fileID: 0}
   target: {fileID: 0}
-  warpEastTarget: {fileID: 1058004959633999927, guid: 43379b3322c03034d947c38222f340c1,
-    type: 3}
-  warpWestTarget: {fileID: 5655448974596023900, guid: cd945ee274ee80c418f6b9476735bf23,
-    type: 3}
   speed: 18
+  powerUp: {fileID: 0}
+  spawnPoint: {fileID: 3309208971496913416}
+  survivor: {fileID: 0}
+  warpEastTarget: {fileID: 3576810824486107290, guid: 43379b3322c03034d947c38222f340c1,
+    type: 3}
+  warpWestTarget: {fileID: 7447392169350166581, guid: efba081d90a06c74788093f3af5475a9,
+    type: 3}
   survivorObject: {fileID: 5225996827943069785, guid: 551a890659578c2418a388f61ee00ad9,
     type: 3}
-  spawnPoint: {fileID: 3309208971496913416}
   success: 0
 --- !u!1 &3309208971496913417
 GameObject:

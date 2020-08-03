@@ -27,12 +27,18 @@ public class Boundary : MonoBehaviour {
 
     //when another object leaves collider
     private void OnTriggerExit2D(Collider2D collision) 
-    {        
+    {
+        //if the object is projectile, destroying the object; if it's using pooling then deactivating it
         if (collision.tag == "Projectile")
         {
-            Destroy(collision.gameObject);
+            if (collision.GetComponent<Projectile>().isPooled) 
+                collision.gameObject.SetActive(false);
+            else
+                Destroy(collision.gameObject);
         }
-        else if (collision.tag == "Bonus") 
+        else if (collision.tag == "Rocket")
+            collision.gameObject.SetActive(false);
+        else if (collision.tag == "Bonus" || collision.tag == "Planet") 
             Destroy(collision.gameObject); 
     }
 

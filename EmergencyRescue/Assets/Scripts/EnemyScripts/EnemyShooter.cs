@@ -36,13 +36,13 @@ public class EnemyShooter : MonoBehaviour
         if(cooldownTimer <= 0 && player != null && Vector3.Distance(transform.position, player.position) < 10)
         {
             cooldownTimer = fireDelay;
-            if(gameObject.tag == "Enemy")
+            if(gameObject.GetComponent<BasicEnemyController>())
             {
                 GameObject enemyBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Creates the bullet
                 Rigidbody2D rb = enemyBullet.GetComponent<Rigidbody2D>(); //Access the bullets rigidbody2d component
                 rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse); // Puts force on the bullet   
             }
-            else if(gameObject.tag == "TurretEnemy")
+            else if(gameObject.GetComponent<TurretEnemyController>())
             {
                 for(int i = 0; i < firePoints.Length; i++)
                 {
