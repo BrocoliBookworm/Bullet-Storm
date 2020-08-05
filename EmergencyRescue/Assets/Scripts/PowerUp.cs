@@ -26,10 +26,11 @@ public class PowerUp : MonoBehaviour
 
    void Pickup(Collider2D player)
    {
-       //Spawn effect
-       Instantiate(healthPickupEffect, transform.position, transform.rotation);
+        //Spawn effect
+        var clone = Instantiate(healthPickupEffect, transform.position, transform.rotation);
 
-       //Remove power up object
-       Destroy(gameObject);
+        //Remove power up object
+        Destroy(clone, 2f);
+        Destroy(gameObject);
    }
 }

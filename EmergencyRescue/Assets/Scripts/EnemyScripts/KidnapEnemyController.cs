@@ -28,49 +28,6 @@ public class KidnapEnemyController : EnemyController
         Instantiate(survivorObject, spawnPoint.position, spawnPoint.rotation);
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
-    {
-        if(gameObject.tag == other.tag)
-        {
-            return;
-        }
-
-        if(other.gameObject.layer == 8)
-        {
-            if(!other.gameObject.GetComponent<ExplodingBullet>())
-            {
-                TakeDamage();
-            }
-            else
-            {
-                currentHealth = currentHealth - 3;
-            }
-        }
-        else if(other.gameObject.layer == 14)
-        {
-            if(success)
-            {
-                return;
-            }
-            else
-            {
-                success = true; 
-                Destroy(other.gameObject);
-            }
-        }
-        else if(other.gameObject.layer == 15)
-        {
-            if(success)
-            {
-                Destroy(gameObject);
-            }
-        }
-        else if(other.gameObject.layer == 11)
-        {
-            Debug.Log("hit a powerup");
-        }
-    }
-
     public override void Target()
     {
         if(survivor == null)
@@ -116,6 +73,9 @@ public class KidnapEnemyController : EnemyController
     public override void Die()
     {
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
+        var clone = Instantiate(deathEffect, transform.position, transform.rotation);
+        
+        Destroy(clone, 1f);
         Destroy(gameObject);
 
         if(success)
@@ -124,5 +84,25 @@ public class KidnapEnemyController : EnemyController
         }
 
         GameManager.Instance().AddScore();
+    }
+
+    protected override void CollideWithSurvivor()
+    {
+        if(success)
+        {
+            return;
+        }
+        else
+        {
+            success = true;
+        }
+    }
+
+    protected override void CollideWithWarp()
+    {
+        if(success)
+        {
+            Destroy(gameObject);
+        }
     }
 }

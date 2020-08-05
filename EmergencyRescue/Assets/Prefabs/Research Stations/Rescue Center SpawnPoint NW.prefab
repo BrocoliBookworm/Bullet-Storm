@@ -10,10 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5643468705233821653}
   - component: {fileID: 5643468705233821225}
-  - component: {fileID: 5643468705233821224}
   - component: {fileID: 5643468705233821227}
   - component: {fileID: 5643468705233821226}
-  - component: {fileID: 5643468705233821230}
   m_Layer: 12
   m_Name: Rescue Center SpawnPoint NW
   m_TagString: SpaceStation
@@ -84,18 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5643468705233821224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5643468705233821652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b425fd1b183737498ecfbe15f7be54d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &5643468705233821227
 Rigidbody2D:
   serializedVersion: 4
@@ -143,18 +129,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5643468705233821230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5643468705233821652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b425fd1b183737498ecfbe15f7be54d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6572709702316029658
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +155,7 @@ Transform:
   m_GameObject: {fileID: 6572709702316029658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 5643468705233821653}
   m_RootOrder: 0

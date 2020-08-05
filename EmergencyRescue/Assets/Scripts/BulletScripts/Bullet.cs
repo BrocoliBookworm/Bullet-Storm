@@ -33,21 +33,15 @@ public class Bullet : MonoBehaviour
         {
             return;
         }
-        if(other.tag == "Enemy" || other.tag == "KidnapEnemy")
+
+        if(other.GetComponent<KidnapEnemyController>() || other.GetComponent<BasicEnemyController>() || other.GetComponent<TurretEnemyController>() || other.GetComponent<PlayerController>())
         {
             Destroy(gameObject);
         }
-        else if(other.tag == "TurretEnemy")
+
+        if(other.GetComponent<PowerUp>())
         {
-            Destroy(gameObject);
-        }
-        else if(other.tag == "Player")
-        {
-            Destroy(gameObject);
-        }
-        else if(other.gameObject.layer == 11)
-        {
-            Debug.Log("hit a powerup");
+            return;
         }
     }
 }

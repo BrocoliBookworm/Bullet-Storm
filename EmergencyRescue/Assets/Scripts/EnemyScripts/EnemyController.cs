@@ -7,6 +7,8 @@ public class EnemyController : HealthManager
     public float rotationSpeed;
     public Transform player;
 
+    public GameObject deathEffect;
+
     public Transform target;
     public float speed;
 
@@ -21,32 +23,48 @@ public class EnemyController : HealthManager
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if(gameObject.tag == other.tag)
+        if(other.GetComponent<EnemyController>())
         {
             return;
         }
 
-        if(other.gameObject.layer == 8)
+        if(other.GetComponent<Bullet>())
         {
-            if(!other.gameObject.GetComponent<ExplodingBullet>())
-            {
-                TakeDamage();
-            }
-            else
-            {
-                currentHealth = currentHealth - 3;
-            }
+            CollideWithBullet(1);
+            return;
         }
-        else if(other.gameObject.layer == 14)
+
+        if(other.GetComponent<ExplodingBullet>())
         {
-            if(!gameObject.GetComponent<KidnapEnemyController>())
-            {
-                Debug.Log("non-kidnap made contact");
-            }
+            CollideWithBullet(3);
+            return;
         }
-        else if(other.gameObject.layer == 11)
+
+        if(other.GetComponent<PlayerController>())
         {
-            Debug.Log("hit a powerup");
+            CollideWithPlayer();
+            return;
+        }
+
+        if(other.GetComponent<SurvivorController>())
+        {
+            CollideWithSurvivor();
+            if(gameObject.GetComponent<KidnapEnemyController>())
+            {
+                Destroy(other.gameObject);
+            }
+            return;
+        }
+
+        if(other.gameObject.layer == 15)
+        {
+            CollideWithWarp();
+            return;
+        }
+
+        if(other.GetComponent<PowerUp>())
+        {
+            return;
         }
     }
 
@@ -74,8 +92,23 @@ public class EnemyController : HealthManager
 
     }
 
-    public override void TakeDamage()
+    protected virtual void CollideWithBullet(int damageTaken)
+    {
+        currentHealth = currentHealth - damageTaken;
+    }
+
+    protected virtual void CollideWithPlayer()
     {
         currentHealth--;
+    }
+
+    protected virtual void CollideWithSurvivor()
+    {
+
+    }
+
+    protected virtual void CollideWithWarp()
+    {
+
     }
 }

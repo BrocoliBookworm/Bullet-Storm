@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &512965970
 Transform:
   m_ObjectHideFlags: 0
@@ -70,7 +70,7 @@ Transform:
   m_GameObject: {fileID: 415534778296628870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.097, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 9060216654719026814}
   m_RootOrder: 3
@@ -9658,11 +9658,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  correctLayer: 0
-  spriteRend: {fileID: 0}
+  correctLayer: 8
+  spriteRend: {fileID: 386728066471444765}
   speed: 15
   maxHealth: 10
   dashSpeed: 100
+  invulnerableTimer: 0
+  deathEffect: {fileID: 7219342613330999709, guid: 658b9889a8e251d448c5625cd64cba28,
+    type: 3}
   maxHeight: 44
   minHeight: -65.5
   leftDistance: -52.6
@@ -9686,7 +9689,9 @@ MonoBehaviour:
     type: 3}
   explosiveShotPrefab: {fileID: 6748284547387223452, guid: b532924e29cf42e4fac79a6b40877974,
     type: 3}
-  bulletForce: 20
+  reloadTimer: 0.1
+  shotAvailable: 1
+  bulletForce: 30
 --- !u!50 &9060216654535600590
 Rigidbody2D:
   serializedVersion: 4

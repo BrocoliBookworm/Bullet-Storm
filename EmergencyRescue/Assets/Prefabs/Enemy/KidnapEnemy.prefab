@@ -129,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.4258358, y: 1.4119639}
   m_EdgeRadius: 0
 --- !u!114 &3309208971291476675
 MonoBehaviour:
@@ -148,14 +148,16 @@ MonoBehaviour:
   spriteRend: {fileID: 0}
   rotationSpeed: 125
   player: {fileID: 0}
+  deathEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 3}
   target: {fileID: 0}
   speed: 18
   powerUp: {fileID: 0}
   spawnPoint: {fileID: 3309208971496913416}
   survivor: {fileID: 0}
-  warpEastTarget: {fileID: 3576810824486107290, guid: 43379b3322c03034d947c38222f340c1,
+  warpEastTarget: {fileID: 1932779619236331403, guid: 43379b3322c03034d947c38222f340c1,
     type: 3}
-  warpWestTarget: {fileID: 7447392169350166581, guid: efba081d90a06c74788093f3af5475a9,
+  warpWestTarget: {fileID: 8208313348068949180, guid: daf8d0bac2029b242a22e17b1f5856f3,
     type: 3}
   survivorObject: {fileID: 5225996827943069785, guid: 551a890659578c2418a388f61ee00ad9,
     type: 3}
@@ -258,7 +260,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b57e9fd4004e73c4486d446c026d338b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 750cb2d9e376df54d98b91bcadf45e60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

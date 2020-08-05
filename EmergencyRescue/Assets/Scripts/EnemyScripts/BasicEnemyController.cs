@@ -57,6 +57,9 @@ public class BasicEnemyController : EnemyController
     public override void Die()
     {
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
+        var clone = Instantiate(deathEffect, transform.position, transform.rotation);
+        
+        Destroy(clone, 1f);
         Destroy(gameObject);
 
         RandomDrop();

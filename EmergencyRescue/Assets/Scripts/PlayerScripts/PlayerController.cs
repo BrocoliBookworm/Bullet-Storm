@@ -12,7 +12,9 @@ public class PlayerController : HealthManager
 
     private float survivorAtTwenty = 0.5f;
 
-    float invulnerableTimer = 0;
+    public float invulnerableTimer = 0;
+
+    public GameObject deathEffect;
 
     Vector3 velocity;
     // private Rigidbody2D rb2d;
@@ -35,6 +37,8 @@ public class PlayerController : HealthManager
         Movement();       
         
         CheckBoundaries();
+
+        Invulnerability();
 
         if(currentHealth <= 0)
         {
@@ -103,33 +107,47 @@ public class PlayerController : HealthManager
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if(gameObject.tag == other.tag)
+        if(gameObject.layer == other.gameObject.layer)
         {
             return;
         }
+        else if(other.GetComponent<Bullet>())
+        {
+            TakeDamage(1);
+            return;
+        }
 
-        if(other.gameObject.layer == 11)
+        if(other.GetComponent<PowerUp>())
         {
             HealthBoost();
+            return;
         }
-        else if(other.gameObject.layer == 12)
+        
+        if(other.gameObject.layer == 12)
         {
             GameManager.Instance().RescueSurvivors();
+            return;
         }
-        else if(other.gameObject.layer == 14)
+        
+        if(other.GetComponent<SurvivorController>())
         {
             GameManager.Instance().AddSurvivors();
+            return;
         }
-        else
+
+        if(other.gameObject.layer == 15)
         {
-            TakeDamage();
+            return;
         }
     }
 
     public override void HealthBoost()
     {
         FindObjectOfType<AudioManager>().Play("PowerUpSound");
-        currentHealth++;
+        if(currentHealth < 10)
+        {
+            currentHealth++;
+        }
         HealthBar.instance.SetHealth(currentHealth);
     }
 
@@ -137,10 +155,12 @@ public class PlayerController : HealthManager
     {
         if(invulnerableTimer > 0)
         {
+            Debug.Log("greater than 0");
             invulnerableTimer -=Time.deltaTime;
         
             if(invulnerableTimer <= 0)
             {
+                Debug.Log("got there");
                 gameObject.layer = correctLayer;
 
                 if(spriteRend != null) 
@@ -158,23 +178,32 @@ public class PlayerController : HealthManager
         }
     }
 
-    public override void TakeDamage()
+    public override void TakeDamage(int damageTaken)
     {
-        currentHealth--;
+        currentHealth = currentHealth - damageTaken;
 
         invulnerableTimer = 0.5f;
 
         gameObject.layer = 10;
 
         HealthBar.instance.SetHealth(currentHealth);
-
-        Invulnerability();
     }
 
     public override void Die()
     {
-        Destroy(gameObject);
+        var clone = Instantiate(deathEffect, transform.position, transform.rotation);
+        
+        Destroy(clone, 1f);
         FindObjectOfType<AudioManager>().Play("PlayerDeath");
+        Invoke("GameOver", 4f);
+        Destroy(gameObject);
+        Debug.Log("invoked");
+        // GameManager.Instance().EndGame();
+    }
+
+    void GameOver()
+    {
+        Debug.Log("end called");
         GameManager.Instance().EndGame();
     }
 }
