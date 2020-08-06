@@ -47,39 +47,58 @@ public class PlayerController : HealthManager
         }
     }
 
+    Vector3 _velocity;
+
     public void Movement()
     {
         Vector3 pos = transform.position;
-        
 
-        //If you press the jump key you should get a speed boost
         if(Input.GetButtonDown("Fire3"))
         {
             if(StaminaBar.instance.equalized)
             {
                 StaminaBar.instance.UseStamina();
-                velocity = new Vector3(0, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
-                Debug.Log("dash");
+                if(Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") == 0)
+                {
+                    velocity = new Vector3(0, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
+                }
+                else if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") == 0)
+                {
+                    velocity = new Vector3(Input.GetAxis("Horizontal") * dashSpeed * Time.deltaTime, 0, 0);
+                }
+                else if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
+                {
+                    velocity = new Vector3(Input.GetAxis("Horizontal") * dashSpeed * Time.deltaTime, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
+                }
             }
         }
-        else if(GameManager.Instance().survivors >= 10)
-        {
-            velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-            velocity = velocity.normalized * speed * survivorAtTen * Time.deltaTime;
-            // Debug.Log("10");
-        }
-        else if(GameManager.Instance().survivors >= 20)
-        {
-            velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-            velocity = velocity.normalized * speed * survivorAtTwenty * Time.deltaTime;
-            // Debug.Log("20");
-        }
+        // else if(GameManager.Instance().survivors >= 10)
+        // {
+        //     velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        //     velocity = velocity.normalized * speed * survivorAtTen * Time.deltaTime;
+        //     // Debug.Log("10");
+        // }
+        // else if(GameManager.Instance().survivors >= 20)
+        // {
+        //     velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        //     velocity = velocity.normalized * speed * survivorAtTwenty * Time.deltaTime;
+        //     // Debug.Log("20");
+        // }
         else
         {
-            velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+            velocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             velocity = velocity.normalized * speed * Time.deltaTime;
             // Debug.Log("normal");
         }
+
+        // _velocity += velocity * Time.deltaTime;
+        // var magnitude = _velocity.magnitude;
+        // if(magnitude > speed)
+        // {
+        //     _velocity *= speed / magnitude;
+        // }
+
+        // pos += _velocity;
         pos += velocity;
         transform.position = pos;
     }
@@ -111,7 +130,7 @@ public class PlayerController : HealthManager
         {
             return;
         }
-        else if(other.GetComponent<Bullet>())
+        else if(other.GetComponent<Bullet>() || other.GetComponent<KidnapEnemyController>() || other.GetComponent<BasicEnemyController>() || other.GetComponent<TurretEnemyController>())
         {
             TakeDamage(1);
             return;
@@ -131,7 +150,15 @@ public class PlayerController : HealthManager
         
         if(other.GetComponent<SurvivorController>())
         {
-            GameManager.Instance().AddSurvivors();
+            if(GameManager.Instance().survivors <= 29)
+            {
+                GameManager.Instance().AddSurvivors();
+            }
+            else if(GameManager.Instance().survivors >= 30)
+            {
+                return;
+            }
+
             return;
         }
 
@@ -155,12 +182,10 @@ public class PlayerController : HealthManager
     {
         if(invulnerableTimer > 0)
         {
-            Debug.Log("greater than 0");
             invulnerableTimer -=Time.deltaTime;
         
             if(invulnerableTimer <= 0)
             {
-                Debug.Log("got there");
                 gameObject.layer = correctLayer;
 
                 if(spriteRend != null) 
@@ -196,14 +221,11 @@ public class PlayerController : HealthManager
         Destroy(clone, 1f);
         FindObjectOfType<AudioManager>().Play("PlayerDeath");
         Invoke("GameOver", 4f);
-        Destroy(gameObject);
-        Debug.Log("invoked");
-        // GameManager.Instance().EndGame();
+        Destroy(gameObject, 4f);
     }
 
-    void GameOver()
+    public void GameOver()
     {
-        Debug.Log("end called");
         GameManager.Instance().EndGame();
     }
 }

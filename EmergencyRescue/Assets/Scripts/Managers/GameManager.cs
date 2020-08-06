@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +13,15 @@ public class GameManager : MonoBehaviour
 
     public GameObject thePlayer;
 
-    public bool playing = false;
+    public static bool won = false;
+
+    public static bool playing = false;
+
+    public static bool gamePaused = false;
+
+    public GameObject winUI;
+
+    public GameObject pauseUI;
 
     public static GameManager Instance()
     {
@@ -43,6 +52,21 @@ public class GameManager : MonoBehaviour
         survivorsSaved = 0;
         Instantiate(thePlayer, transform.position, Quaternion.identity); 
     }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(gamePaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+    }
     
     public void AddScore()
     {
@@ -62,13 +86,31 @@ public class GameManager : MonoBehaviour
         {
             survivorsSaved = survivors;
         }
-        else
+        else 
         {
             survivorsSaved += survivors;
         }
+
+        if(survivorsSaved >= 199)
+        {
+            if(!won)
+            {
+                WinGame();
+            }
+        }
+
         survivors = 0;
         survivorUpdate.UpdateSurvivors();  
         rescueUpdate.UpdateRescue();
+    }
+
+    public void WinGame()
+    {
+        won = true;
+        gamePaused = true;
+        playing = false;
+        winUI.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void EndGame()
@@ -76,6 +118,24 @@ public class GameManager : MonoBehaviour
         MainMenu.Instance().GameOver();
         // Invoke("NextScreen", 4f);
         playing = false;
+    }
+
+    public void Pause()
+    {
+        pauseUI.SetActive(true);
+        Time.timeScale = 0f;
+        gamePaused = true;
+        playing = false;
+    }
+
+    public void Resume()
+    {
+        Debug.Log("resume");
+        pauseUI.SetActive(false);
+        winUI.SetActive(false);
+        Time.timeScale = 1f;
+        gamePaused = false;
+        playing = true;
     }
 
     // public void NextScreen()

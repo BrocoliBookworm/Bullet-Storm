@@ -15,7 +15,14 @@ public class SurvivorController : MonoBehaviour
     {
         if(other.GetComponent<PlayerController>())
         {
-            Destroy(gameObject);
+            if(GameManager.Instance().survivors <= 29)
+            {
+                Destroy(gameObject);
+            }
+            else if(GameManager.Instance().survivors >= 30)
+            {
+                return;
+            }
         }
     }
 

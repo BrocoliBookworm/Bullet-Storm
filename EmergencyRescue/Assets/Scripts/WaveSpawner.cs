@@ -82,10 +82,11 @@ public class WaveSpawner : MonoBehaviour
 
         Transform _sp = survivorSpawnPoints[Random.Range(0, survivorSpawnPoints.Length)];
         Transform _spForTurret = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
-
+            
         // Spawn
         for(int i = 0; i < _wave.count; i++)
         {
+
             SpawnSurvivor(_wave.survivor, _sp);
             SpawnTurretEnemy(_wave.turretEnemy, _spForTurret);
             SpawnKidnapEnemy(_wave.kidnapEnemy);
@@ -105,7 +106,7 @@ public class WaveSpawner : MonoBehaviour
         if(nextWave + 1 > waves.Length - 1)
         {
             nextWave = 0;
-            Debug.Log("ALL WAVES COMPLETE, Looping");
+            // Debug.Log("ALL WAVES COMPLETE, Looping");
         }
         else
         {
@@ -123,7 +124,7 @@ public class WaveSpawner : MonoBehaviour
         offset = offset.normalized * survivorSpawnDistance;
 
         //Spawn survivors
-        Instantiate(survivor, survivor.position + offset, survivor.rotation);
+        Instantiate(survivor, spawnlocation.position + offset, spawnlocation.rotation);
     }
 
     void SpawnTurretEnemy(Transform turret, Transform spawnlocation)
@@ -136,7 +137,7 @@ public class WaveSpawner : MonoBehaviour
         offset = offset.normalized * survivorSpawnDistance;
 
         //Spawning
-        Instantiate(turret, turret.position + offset, turret.rotation);
+        Instantiate(turret, spawnlocation.position + offset, spawnlocation.rotation);
     }
 
     void SpawnKidnapEnemy(Transform kidnapEnemy)

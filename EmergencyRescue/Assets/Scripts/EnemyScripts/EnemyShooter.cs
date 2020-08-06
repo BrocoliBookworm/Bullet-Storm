@@ -33,7 +33,7 @@ public class EnemyShooter : MonoBehaviour
         }
 
         cooldownTimer -= Time.deltaTime;
-        if(cooldownTimer <= 0 && player != null && Vector3.Distance(transform.position, player.position) < 10)
+        if(cooldownTimer <= 0 && player != null && Vector3.Distance(transform.position, player.position) < 15)
         {
             cooldownTimer = fireDelay;
             if(gameObject.GetComponent<BasicEnemyController>())

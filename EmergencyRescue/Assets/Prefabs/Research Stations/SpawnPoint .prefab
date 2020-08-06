@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2578102349556815574}
   - component: {fileID: 8236370938973584567}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,10 +65,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b3e2ccead76416948a5e3f87ef7578fe, type: 3}
+  m_SortingLayerID: 1947543829
+  m_SortingLayer: 1
+  m_SortingOrder: 100
+  m_Sprite: {fileID: 21300000, guid: e8c31d2fa3f34be4c81690a90d57718e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 7005418636349484534}
   - component: {fileID: 5412641310622481281}
   - component: {fileID: 1738409817195639019}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 'SpawnPoint '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,10 +214,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3098e75ed26d02241a4a31c972c5cf88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textUpdate: {fileID: 0}
   thePlayer: {fileID: 9060216654535600592, guid: 1d1ca9773af1c00479fa98ba1a1795df,
     type: 3}
+  winUI: {fileID: 0}
+  pauseUI: {fileID: 0}
   score: 0
+  survivors: 0
+  survivorsSaved: 0
 --- !u!222 &1738409817195639019
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -34,14 +34,37 @@ public class Bullet : MonoBehaviour
             return;
         }
 
+        if(gameObject.GetComponent<ExplodingBullet>())
+        {
+            if(other.GetComponent<KidnapEnemyController>() || other.GetComponent<BasicEnemyController>() || other.GetComponent<TurretEnemyController>())
+            {
+                ExplodeDestroy();
+            }
+        }
+
         if(other.GetComponent<KidnapEnemyController>() || other.GetComponent<BasicEnemyController>() || other.GetComponent<TurretEnemyController>() || other.GetComponent<PlayerController>())
         {
             Destroy(gameObject);
+        }
+
+        if(other.gameObject.layer == 15)
+        {
+            return;
+        }
+
+        if(other.gameObject.layer == 12)
+        {
+            return;
         }
 
         if(other.GetComponent<PowerUp>())
         {
             return;
         }
+    }
+
+    public virtual void ExplodeDestroy()
+    {
+
     }
 }

@@ -15,8 +15,6 @@ public class BorderControl : MonoBehaviour
     public TextMeshProUGUI timerText;
     public GameObject warningUI;
 
-    public PlayerController playerControl;
-
 
     void Awake() 
     {

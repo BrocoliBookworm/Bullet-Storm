@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ExplodingBullet : Bullet
 {
+    public GameObject explosionEffect;
     // Update is called once per frame
     void Update()
     {
@@ -11,7 +12,14 @@ public class ExplodingBullet : Bullet
 
         if(timer <= 0)
         {
-            Destroy(gameObject);
+            ExplodeDestroy();
         }
+    }
+
+    public override void ExplodeDestroy()
+    {
+        var clone = Instantiate(explosionEffect, transform.position, transform.rotation);
+        Destroy(clone, 1f);
+        Destroy(gameObject);
     }
 }
