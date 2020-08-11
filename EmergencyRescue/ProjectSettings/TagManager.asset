@@ -21,6 +21,8 @@ TagManager:
   - TurretEnemy
   - KidnapEnemy
   - ExplosiveShot
+  - ShipSurvivor
+  - ExtraShipSurvivor
   layers:
   - Default
   - TransparentFX

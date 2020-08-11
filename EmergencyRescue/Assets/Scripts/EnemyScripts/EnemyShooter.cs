@@ -11,8 +11,8 @@ public class EnemyShooter : MonoBehaviour
     public float bulletForce;
     public float fireDelay;
 
-    Transform player;
-    float cooldownTimer = 0;
+    public Transform player;
+    public float cooldownTimer;
     void Start()
     {
         
@@ -20,6 +20,11 @@ public class EnemyShooter : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+
+    }
+
+    public void Target()
     {
         if(player == null)
         {
@@ -31,37 +36,20 @@ public class EnemyShooter : MonoBehaviour
                 player = go.transform;
             }
         }
+    }
 
-        cooldownTimer -= Time.deltaTime;
-        if(cooldownTimer <= 0 && player != null && Vector3.Distance(transform.position, player.position) < 15)
-        {
-            cooldownTimer = fireDelay;
-            if(gameObject.GetComponent<BasicEnemyController>())
-            {
-                GameObject enemyBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Creates the bullet
-                Rigidbody2D rb = enemyBullet.GetComponent<Rigidbody2D>(); //Access the bullets rigidbody2d component
-                rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse); // Puts force on the bullet   
-            }
-            else if(gameObject.GetComponent<TurretEnemyController>())
-            {
-                for(int i = 0; i < firePoints.Length; i++)
-                {
-                    Vector3 v = (firePoints[i].transform.position - transform.position).normalized;
-                    Quaternion rot = Quaternion.FromToRotation(Vector3.up, v); //research this
-                    GameObject enemyBullet = Instantiate(bulletPrefab, firePoints[i].position, rot);
-                    enemyBullet.tag = gameObject.tag;
-                    enemyBullet.GetComponent<Bullet>().velocity = v * bulletForce;
-                } 
-                // GameObject enemyBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                // enemyBullet.tag = gameObject.tag;
-                // enemyBullet.GetComponent<Bullet>().velocity = (player.position - transform.position).normalized * bulletForce;
+    public virtual void BasicEnemyShot()
+    {
 
-                // Rigidbody2D[] rb = enemyBullet.GetComponentsInChildren<Rigidbody2D>();
-                // for(int i = 0; i < rb.Length; i++)
-                // {
-                //     //rb[i].AddForce((transform.position - player.position).normalized * bulletForce, ForceMode2D.Impulse);
-                // }
-            }
-        }
+    }
+
+    public virtual void TurretShot()
+    {
+
+    }
+
+    public virtual void BossShot()
+    {
+        
     }
 }

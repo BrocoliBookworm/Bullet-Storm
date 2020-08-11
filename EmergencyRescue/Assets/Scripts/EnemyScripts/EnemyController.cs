@@ -30,15 +30,24 @@ public class EnemyController : HealthManager
 
         if(other.GetComponent<Bullet>())
         {
-            CollideWithBullet(1);
-            return;
+            if(other.GetComponent<ExplodingBullet>())
+            {
+                CollideWithBullet(3);
+                return;
+            }
+            else
+            {
+                CollideWithBullet(1);
+                return;
+            }
         }
 
-        if(other.GetComponent<ExplodingBullet>())
-        {
-            CollideWithBullet(3);
-            return;
-        }
+        // if(other.GetComponent<ExplodingBullet>())
+        // {
+        //     CollideWithBullet(3);
+        //     Debug.Log("damage3");
+        //     return;
+        // }
 
         if(other.GetComponent<PlayerController>())
         {
@@ -48,10 +57,25 @@ public class EnemyController : HealthManager
 
         if(other.GetComponent<SurvivorController>())
         {
-            CollideWithSurvivor();
-            if(gameObject.GetComponent<KidnapEnemyController>())
+            if(gameObject.GetComponent<KidnapEnemyController>().success != true)
             {
-                Destroy(other.gameObject);
+                if(other.GetComponent<AssistShipSurvivorsController>())
+                {
+                    Destroy(other.gameObject);
+                    gameObject.GetComponent<KidnapEnemyController>().assistSurvivor = true;
+                }
+                else if(other.GetComponent<OnShipSurvivorsController>())
+                {
+                    Destroy(other.gameObject);
+                    gameObject.GetComponent<KidnapEnemyController>().shipSurvivor = true;
+                }
+                else
+                {
+                    Destroy(other.gameObject);
+                    gameObject.GetComponent<KidnapEnemyController>().regularSurvivor = true;
+                }
+
+                CollideWithSurvivor();
             }
             return;
         }
@@ -70,7 +94,7 @@ public class EnemyController : HealthManager
 
     public void RandomDrop()
     {
-        if(Random.value > 0.7)
+        if(Random.value > 0.8)
         {
             Instantiate(powerUp, spawnPoint.position, spawnPoint.rotation);
         }

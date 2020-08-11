@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    private static EnemySpawner _instance;
     public GameObject EPrefab;
 
     //Timer
@@ -15,6 +16,25 @@ public class EnemySpawner : MonoBehaviour
     //How far to spawn enemies 
     float spawnDistance = 25f;
 
+    public int currentEnemies;
+    private int maxEnemies = 10;
+
+    public static EnemySpawner Instance()
+    {
+        if(_instance == null)
+        {
+            GameObject go = new GameObject("EnemySpawner"); //assign instance to this instance of the class
+            go.AddComponent<GameManager>();
+        }
+
+        return _instance;
+    }
+
+    void Awake() 
+    {
+        _instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +44,52 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       Spawn();
+        if(GameManager.Instance().survivorsSaved < 30)
+        {
+            if(currentEnemies < maxEnemies)
+            {
+                Debug.Log("max is 10");
+                Spawn();
+            }
+            else
+            {
+                Debug.Log("max");
+                return;
+            }
+        }
+        else if(GameManager.Instance().survivorsSaved > 50)
+        {
+            if(GameManager.Instance().survivorsSaved > 75)
+            {
+                maxEnemies = 50;
+
+                if(currentEnemies < maxEnemies)
+                {
+                    Debug.Log("max is 50");
+                    Spawn();
+                }
+                else
+                {
+                    Debug.Log("max");
+                    return;
+                }   
+            }
+            else
+            {
+                maxEnemies = 25;
+
+                if(currentEnemies < maxEnemies)
+                {
+                    Debug.Log("max is 25");
+                    Spawn();
+                }
+                else
+                {
+                    Debug.Log("max");
+                    return;
+                }      
+            }  
+        }
     }
 
     void Spawn()
@@ -38,7 +103,7 @@ public class EnemySpawner : MonoBehaviour
             //Sets a bare minimum timer for spawning in enemies
             if(enemyRate < 2)
             {
-                enemyRate = 2;
+                enemyRate = 1.5f;
             }
 
             //Creates an offset in a random area in a sphere
@@ -50,6 +115,8 @@ public class EnemySpawner : MonoBehaviour
 
             //spawns the enemies
             Instantiate(EPrefab, transform.position + offset, Quaternion.identity);
+            currentEnemies++;
+            Debug.Log("Current Enemies: " + currentEnemies);
         }
     }
 }

@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &157648107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 157648108}
+  m_Layer: 12
+  m_Name: BossSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &157648108
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157648107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7005418636349484534}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 45.5}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &883176516231091110
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 883176516231091110}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 7005418636349484534}
   m_RootOrder: 0
@@ -45,6 +80,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -56,6 +92,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -65,10 +102,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1947543829
-  m_SortingLayer: 1
-  m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: e8c31d2fa3f34be4c81690a90d57718e, type: 3}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -126
+  m_Sprite: {fileID: 21300000, guid: 4af45e89e7061e7409f6aafe3149425b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,7 +142,7 @@ RectTransform:
   m_GameObject: {fileID: 6653706206090841049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 7005418636349484534}
   m_RootOrder: 1
@@ -129,6 +166,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -140,6 +178,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -152,7 +191,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 394e93ce356b57344903a08ff72fcab2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4af45e89e7061e7409f6aafe3149425b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,6 +213,7 @@ GameObject:
   - component: {fileID: 7005418636349484534}
   - component: {fileID: 5412641310622481281}
   - component: {fileID: 1738409817195639019}
+  - component: {fileID: 5534479581236579910}
   m_Layer: 12
   m_Name: 'SpawnPoint '
   m_TagString: Untagged
@@ -194,6 +234,7 @@ RectTransform:
   m_Children:
   - {fileID: 2578102349556815574}
   - {fileID: 6094770603352428794}
+  - {fileID: 157648108}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -216,11 +257,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayer: {fileID: 9060216654535600592, guid: 1d1ca9773af1c00479fa98ba1a1795df,
     type: 3}
+  theBoss: {fileID: 1705482634041248951, guid: acc5a78992f373d40b68a652de72392f, type: 3}
+  bossSpawned: 0
+  bossSpawnPoint: {fileID: 157648108}
+  bossSpawnTimer: 45
+  deathEffect: {fileID: 7219342613330999709, guid: 658b9889a8e251d448c5625cd64cba28,
+    type: 3}
+  survivorSavedEffect: {fileID: 1000011396044746, guid: 96b2ec0239d11fa4b9792311efceb8ed,
+    type: 3}
   winUI: {fileID: 0}
   pauseUI: {fileID: 0}
+  deathUI: {fileID: 0}
   score: 0
   survivors: 0
+  onShipSurvivors: 0
+  assistShipSurvivors: 0
+  assistShipSurvivorSaved: 0
   survivorsSaved: 0
+  thePlayerShip: {fileID: 0}
 --- !u!222 &1738409817195639019
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -229,3 +283,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6989604187634066855}
   m_CullTransparentMesh: 0
+--- !u!70 &5534479581236579910
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989604187634066855}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.8957834}
+  m_Size: {x: 7.4017997, y: 11.303661}
+  m_Direction: 0

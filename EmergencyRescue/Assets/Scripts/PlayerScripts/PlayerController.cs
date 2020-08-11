@@ -6,7 +6,7 @@ public class PlayerController : HealthManager
 {
     public float speed;
     public int maxHealth;
-    public float dashSpeed; //speed of the dash
+    public float dashSpeed;
 
     private float survivorAtTen = 0.75f;
 
@@ -14,16 +14,17 @@ public class PlayerController : HealthManager
 
     public float invulnerableTimer = 0;
 
-    public GameObject deathEffect;
+    // public GameObject deathEffect;
+
+    public GameObject[] hurtEffects;
+
+    public GameObject[] assistShips;
 
     Vector3 velocity;
-    // private Rigidbody2D rb2d;
     public float maxHeight;
     public float minHeight;
     public float leftDistance;
     public float rightDistance;
-
-    // public Vector2 movement;
 
     void Start()
     {
@@ -35,14 +36,24 @@ public class PlayerController : HealthManager
     {
         FaceMouse();
         Movement();       
-        
         CheckBoundaries();
-
         Invulnerability();
+        //DamageEffect();
+
+        if(GameManager.Instance().assistShipSurvivorSaved >= 5)
+        {
+            Debug.Log("5");
+            assistShips[0].SetActive(true);
+        }
+
+        if(GameManager.Instance().assistShipSurvivorSaved >= 10)
+        {
+            Debug.Log("10");
+            assistShips[1].SetActive(true);
+        }
 
         if(currentHealth <= 0)
         {
-            Debug.Log("died");
             Die();
         }
     }
@@ -142,7 +153,7 @@ public class PlayerController : HealthManager
             return;
         }
         
-        if(other.gameObject.layer == 12)
+        if(other.GetComponent<GameManager>())
         {
             GameManager.Instance().RescueSurvivors();
             return;
@@ -150,6 +161,30 @@ public class PlayerController : HealthManager
         
         if(other.GetComponent<SurvivorController>())
         {
+            if(other.GetComponent<OnShipSurvivorsController>())
+            {
+                if(GameManager.Instance().survivors <= 29)
+                {
+                    GameManager.Instance().onShipSurvivors++;
+                }
+                else if(GameManager.Instance().survivors >= 30)
+                {
+                    return;
+                }
+            }
+
+            if(other.GetComponent<AssistShipSurvivorsController>())
+            {
+                if(GameManager.Instance().survivors <= 29)
+                {
+                    GameManager.Instance().assistShipSurvivors++;
+                }
+                else if(GameManager.Instance().survivors >= 30)
+                {
+                    return;
+                }
+            }
+
             if(GameManager.Instance().survivors <= 29)
             {
                 GameManager.Instance().AddSurvivors();
@@ -214,18 +249,46 @@ public class PlayerController : HealthManager
         HealthBar.instance.SetHealth(currentHealth);
     }
 
-    public override void Die()
+    public void DamageEffect()
     {
-        var clone = Instantiate(deathEffect, transform.position, transform.rotation);
+        if(currentHealth <= 7)
+        {
+            var clone = Instantiate(hurtEffects[0], transform.position, transform.rotation);
+            Debug.Log("small");
+        }
+
+        if(currentHealth <= 5)
+        {
+            var clone = Instantiate(hurtEffects[1], transform.position, transform.rotation);
+            Debug.Log("medium");
+        }
         
-        Destroy(clone, 1f);
-        FindObjectOfType<AudioManager>().Play("PlayerDeath");
-        Invoke("GameOver", 4f);
-        Destroy(gameObject, 4f);
+        if(currentHealth <= 3)
+        {
+            var clone = Instantiate(hurtEffects[2], transform.position, transform.rotation);
+            Debug.Log("large");
+        }
+        
+        if(currentHealth == 0)
+        {
+            return;
+        }
     }
 
-    public void GameOver()
+    public override void Die()
     {
+        // var clone = Instantiate(deathEffect, transform.position, transform.rotation);
+        
+        // Destroy(clone, 1f);
+        // FindObjectOfType<AudioManager>().Play("PlayerDeath");
+        // Invoke("GameOver", 4f);
+        // Destroy(gameObject, 4f);
+
         GameManager.Instance().EndGame();
     }
+
+    // public void GameOver()
+    // {
+    //     GameManager.Instance().EndGame();
+    // }
 }

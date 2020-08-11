@@ -11,6 +11,8 @@ public class WaveSpawner : MonoBehaviour
     {
         public string name;
         public Transform survivor;
+        public Transform assistSurvivors;
+        public Transform onShipSurvivors;
         public Transform kidnapEnemy;
         public Transform turretEnemy;
         public int count;
@@ -77,18 +79,18 @@ public class WaveSpawner : MonoBehaviour
     //Sadly I must use the devil
     IEnumerator spawnWave(Wave _wave)
     {
-        // Debug.Log("Spawning wave: " + _wave.name);
         state = spawnState.SPAWNING;
 
         Transform _sp = survivorSpawnPoints[Random.Range(0, survivorSpawnPoints.Length)];
-        Transform _spForTurret = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
             
         // Spawn
         for(int i = 0; i < _wave.count; i++)
         {
 
             SpawnSurvivor(_wave.survivor, _sp);
-            SpawnTurretEnemy(_wave.turretEnemy, _spForTurret);
+            SpawnExtraSurvivor(_wave.assistSurvivors, _sp);
+            SpawnOnShipSurvivor(_wave.onShipSurvivors, _sp);
+            SpawnTurretEnemy(_wave.turretEnemy);
             SpawnKidnapEnemy(_wave.kidnapEnemy);
             yield return new WaitForSeconds(1f/_wave.rate);
         }
@@ -116,8 +118,6 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnSurvivor(Transform survivor, Transform spawnlocation)
     {
-        // Transform _sp = survivorSpawnPoints[Random.Range(0, survivorSpawnPoints.Length)];
-
         Vector3 offset = Random.onUnitSphere;
         offset.z = 0;
 
@@ -127,9 +127,31 @@ public class WaveSpawner : MonoBehaviour
         Instantiate(survivor, spawnlocation.position + offset, spawnlocation.rotation);
     }
 
-    void SpawnTurretEnemy(Transform turret, Transform spawnlocation)
+    void SpawnExtraSurvivor(Transform assistSurvivors, Transform spawnlocation)
     {
-        // Transform _sp = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
+        Vector3 offset = Random.onUnitSphere;
+        offset.z = 0;
+
+        offset = offset.normalized * survivorSpawnDistance;
+
+        //Spawn survivors
+        Instantiate(assistSurvivors, spawnlocation.position + offset, spawnlocation.rotation);
+    }
+
+    void SpawnOnShipSurvivor(Transform onShipSurvivors, Transform spawnlocation)
+    {
+        Vector3 offset = Random.onUnitSphere;
+        offset.z = 0;
+
+        offset = offset.normalized * survivorSpawnDistance;
+
+        //Spawn survivors
+        Instantiate(onShipSurvivors, spawnlocation.position + offset, spawnlocation.rotation);
+    }
+
+    void SpawnTurretEnemy(Transform turret)
+    {
+        Transform _sp = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
 
         Vector3 offset = Random.onUnitSphere;
         offset.z = 0;
@@ -137,7 +159,7 @@ public class WaveSpawner : MonoBehaviour
         offset = offset.normalized * survivorSpawnDistance;
 
         //Spawning
-        Instantiate(turret, spawnlocation.position + offset, spawnlocation.rotation);
+        Instantiate(turret, _sp.position + offset, _sp.rotation);
     }
 
     void SpawnKidnapEnemy(Transform kidnapEnemy)

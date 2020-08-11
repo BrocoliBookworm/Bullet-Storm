@@ -47,12 +47,12 @@ MonoBehaviour:
   sounds:
   - name: ShotSound
     clip: {fileID: 8300000, guid: d869316c81f6fcd40b09306d65365189, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PowerUpSound
-    clip: {fileID: 8300000, guid: 6cda95ebbd5e00a45922696625d16df6, type: 3}
+    clip: {fileID: 8300000, guid: a4a9327e98855524c846cc8e2f559e96, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -65,6 +65,24 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: 3d0761ceab4463f4da2a1bea77c01f76, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuSelect
+    clip: {fileID: 8300000, guid: 64ec35bc47342ea4fb3286dbc4c944f7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PowerUpShot
+    clip: {fileID: 8300000, guid: 2875bf7f2043b9a4880ecb71e577a5c8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DropOff
+    clip: {fileID: 8300000, guid: 1a0a0adb15c6cad49ae4d146f13dd8bf, type: 3}
     volume: 1
     pitch: 1
     loop: 0

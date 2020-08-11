@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
 
         if(gameObject.GetComponent<ExplodingBullet>())
         {
-            if(other.GetComponent<KidnapEnemyController>() || other.GetComponent<BasicEnemyController>() || other.GetComponent<TurretEnemyController>())
+            if(other.GetComponent<KidnapEnemyController>() || other.GetComponent<TankEnemyController>() ||other.GetComponent<BasicEnemyController>() || other.GetComponent<TurretEnemyController>())
             {
                 ExplodeDestroy();
             }

@@ -25,7 +25,6 @@ public class TurretEnemyController : EnemyController
     {
         if(player == null)
         {
-            //Find the players ship
             target = GameObject.FindWithTag("Player").transform;
             
             if(target != null)

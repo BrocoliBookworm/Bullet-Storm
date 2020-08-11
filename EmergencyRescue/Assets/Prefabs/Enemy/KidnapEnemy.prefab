@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3309208971291476672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.69, y: 2.42, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3309208972256407900}
   - {fileID: 3309208971496913416}
@@ -50,6 +50,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -61,6 +62,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 750cb2d9e376df54d98b91bcadf45e60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40df2b9bfae68fe42867294b9420a1ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,14 +124,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 1.8962963, y: 1.8962963}
     newSize: {x: 10.24, y: 10.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.4258358, y: 1.4119639}
+  m_Size: {x: 1.6647829, y: 1.4119639}
   m_EdgeRadius: 0
 --- !u!114 &3309208971291476675
 MonoBehaviour:
@@ -151,7 +153,7 @@ MonoBehaviour:
   deathEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
   target: {fileID: 0}
-  speed: 18
+  speed: 17
   powerUp: {fileID: 0}
   spawnPoint: {fileID: 3309208971496913416}
   survivor: {fileID: 0}
@@ -161,6 +163,13 @@ MonoBehaviour:
     type: 3}
   survivorObject: {fileID: 5225996827943069785, guid: 551a890659578c2418a388f61ee00ad9,
     type: 3}
+  assistSurvivorObject: {fileID: 8906359264199976200, guid: aeaf3020fa1b7a94fb4f4954e67f83a1,
+    type: 3}
+  onShipSurvivorObject: {fileID: 7240737205378193575, guid: c3d8d39620c74fb43851772bd99c5be5,
+    type: 3}
+  assistSurvivor: 0
+  shipSurvivor: 0
+  regularSurvivor: 0
   success: 0
 --- !u!1 &3309208971496913417
 GameObject:
@@ -237,6 +246,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -248,6 +258,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -260,7 +271,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 750cb2d9e376df54d98b91bcadf45e60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40df2b9bfae68fe42867294b9420a1ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

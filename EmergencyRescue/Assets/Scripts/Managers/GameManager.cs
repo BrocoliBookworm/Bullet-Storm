@@ -12,6 +12,14 @@ public class GameManager : MonoBehaviour
     private RescueUpdate rescueUpdate;
 
     public GameObject thePlayer;
+    public GameObject theBoss;
+    public bool bossSpawned = false;
+    public Transform bossSpawnPoint;
+    public float bossSpawnTimer;
+    public bool firstSpawn = false;
+    
+    public GameObject deathEffect;
+    public GameObject survivorSavedEffect;
 
     public static bool won = false;
 
@@ -22,6 +30,8 @@ public class GameManager : MonoBehaviour
     public GameObject winUI;
 
     public GameObject pauseUI;
+
+    public GameObject deathUI;
 
     public static GameManager Instance()
     {
@@ -36,7 +46,12 @@ public class GameManager : MonoBehaviour
 
     public int score;
     public int survivors;
+    public int onShipSurvivors;
+    public int assistShipSurvivors;
+    public int assistShipSurvivorSaved;
     public int survivorsSaved;
+
+    public Transform thePlayerShip;
     private int addScore = 10;
     
     void Awake() 
@@ -50,7 +65,10 @@ public class GameManager : MonoBehaviour
         score = 0;
         survivors = 0;
         survivorsSaved = 0;
+        onShipSurvivors = 0;
+        assistShipSurvivors = 0;
         Instantiate(thePlayer, transform.position, Quaternion.identity); 
+        thePlayerShip = thePlayer.transform;
     }
 
     void Update()
@@ -66,11 +84,45 @@ public class GameManager : MonoBehaviour
                 Pause();
             }
         }
+
+        if(survivorsSaved >= 25)
+        {
+            firstSpawn = true;
+
+            if(!bossSpawned)
+            {
+                if(!firstSpawn)
+                {
+                    bossSpawnTimer -= Time.deltaTime;
+                    
+                    if(bossSpawnTimer <= 0)
+                    {
+                        bossSpawned = true;
+                        Instantiate(theBoss, bossSpawnPoint.position, bossSpawnPoint.rotation);
+                    }
+                }
+                else
+                {
+                    bossSpawned = true;
+                    Instantiate(theBoss, bossSpawnPoint.position, bossSpawnPoint.rotation);
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
     }
     
     public void AddScore()
     {
         score += addScore;
+        textUpdate.UpdateScore();
+    }
+
+    public void BossKilled()
+    {
+        score += addScore * 3;
         textUpdate.UpdateScore();
     }
 
@@ -82,6 +134,11 @@ public class GameManager : MonoBehaviour
 
     public void RescueSurvivors()
     {
+        var clone = Instantiate(survivorSavedEffect, transform.position, transform.rotation);
+        Destroy(clone, 1f);
+
+        FindObjectOfType<AudioManager>().Play("DropOff");
+
         if(survivorsSaved == 0)
         {
             survivorsSaved = survivors;
@@ -97,6 +154,15 @@ public class GameManager : MonoBehaviour
             {
                 WinGame();
             }
+        }
+
+        if(assistShipSurvivorSaved == 0)
+        {
+            assistShipSurvivorSaved = assistShipSurvivors;
+        }
+        else
+        {
+            assistShipSurvivorSaved += assistShipSurvivors;
         }
 
         survivors = 0;
@@ -115,9 +181,21 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        MainMenu.Instance().GameOver();
-        // Invoke("NextScreen", 4f);
         playing = false;
+        FindObjectOfType<AudioManager>().Play("PlayerDeath");
+        var clone = Instantiate(deathEffect, thePlayer.transform.position, thePlayer.transform.rotation);
+        Destroy(clone);
+        Invoke("UICall", 1f);
+        
+        Destroy(thePlayer);
+        // Time.timeScale = 0f;
+        // deathUI.SetActive(true);
+    }
+
+    public void UICall()
+    {
+        Time.timeScale = 0f;
+        deathUI.SetActive(true);
     }
 
     public void Pause()
@@ -130,16 +208,10 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("resume");
         pauseUI.SetActive(false);
         winUI.SetActive(false);
         Time.timeScale = 1f;
         gamePaused = false;
         playing = true;
     }
-
-    // public void NextScreen()
-    // {
-    //     MainMenu.Instance().GameOver();
-    // }
 }

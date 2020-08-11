@@ -26,7 +26,7 @@ public class SurvivorController : MonoBehaviour
         }
     }
 
-    void Death()
+    public void Death()
     {
         if(lifespan > 0)
         {

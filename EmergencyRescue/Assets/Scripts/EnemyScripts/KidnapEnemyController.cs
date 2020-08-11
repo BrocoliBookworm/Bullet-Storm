@@ -8,6 +8,11 @@ public class KidnapEnemyController : EnemyController
     public Transform warpEastTarget;
     public Transform warpWestTarget;
     public GameObject survivorObject;
+    public GameObject assistSurvivorObject;
+    public GameObject onShipSurvivorObject;
+    public bool assistSurvivor = false;
+    public bool shipSurvivor = false;
+    public bool regularSurvivor = false;
 
     public bool success = false;
 
@@ -25,7 +30,20 @@ public class KidnapEnemyController : EnemyController
 
     public void SurvivorDrop()
     {
-        Instantiate(survivorObject, spawnPoint.position, spawnPoint.rotation);
+        if(shipSurvivor)
+        {
+            Instantiate(onShipSurvivorObject, spawnPoint.position, spawnPoint.rotation);
+        }
+        
+        if(assistSurvivor)
+        {
+            Instantiate(assistSurvivorObject, spawnPoint.position, spawnPoint.rotation);
+        }
+        
+        if(regularSurvivor)
+        {
+            Instantiate(survivorObject, spawnPoint.position, spawnPoint.rotation);
+        }
     }
 
     public override void Target()
@@ -35,7 +53,7 @@ public class KidnapEnemyController : EnemyController
             if(success != true)
             {
                 var target = FindObjectOfType<SurvivorController>();
-
+            
                 if(target != null)
                 {
                     survivor = target.transform;

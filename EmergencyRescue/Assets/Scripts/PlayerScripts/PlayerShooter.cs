@@ -31,12 +31,12 @@ public class PlayerShooter : MonoBehaviour
         {
             if(shotAvailable)
             {
-                if(GameManager.Instance().survivors < 10)
+                if(GameManager.Instance().onShipSurvivors < 10)
                 {
                     RegularShoot();
                     shotAvailable = false;
                 }
-                else if(GameManager.Instance().survivors >= 10)
+                else if(GameManager.Instance().onShipSurvivors >= 10)
                 {
                     TripleShot();
                     shotAvailable = false;
@@ -46,7 +46,7 @@ public class PlayerShooter : MonoBehaviour
 
         if(Input.GetButton("Fire2"))
         {
-            if(GameManager.Instance().survivors >= 20)
+            if(GameManager.Instance().onShipSurvivors >= 20)
             {
                 if(explosiveAvailable)
                 {
@@ -56,7 +56,7 @@ public class PlayerShooter : MonoBehaviour
         }
     }
 
-    void Reload()
+    public void Reload()
     {
         reloadTimer -= Time.deltaTime;
         if(reloadTimer <= 0)
@@ -77,7 +77,6 @@ public class PlayerShooter : MonoBehaviour
 
     void TripleShot()
     {
-        
         GameObject tripleBullet = Instantiate(tripleBulletPrefab, centralFirepoint.position, centralFirepoint.rotation);
         Rigidbody2D[] rb = tripleBullet.GetComponentsInChildren<Rigidbody2D>();
         for(int i = 0; i < rb.Length; i++)
@@ -95,6 +94,8 @@ public class PlayerShooter : MonoBehaviour
         rb.AddForce(centralFirepoint.up * bulletForce, ForceMode2D.Impulse);
 
         explosiveAvailable = false;
+
+        FindObjectOfType<AudioManager>().Play("PowerUpShot");
     }
 
     void ExplosiveShotTimer()
@@ -112,5 +113,10 @@ public class PlayerShooter : MonoBehaviour
                 explosiveTimer = 5;
             }
         }
+    }
+
+    public virtual void AssistShot()
+    {
+
     }
 }

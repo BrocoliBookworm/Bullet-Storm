@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        FindObjectOfType<AudioManager>().Play("MenuSelect");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -36,16 +37,13 @@ public class MainMenu : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
-
-    public void GameOver()
-    {
-        SceneManager.LoadScene(2);
+        FindObjectOfType<AudioManager>().Play("MenuSelect");
+        SceneManager.LoadScene(1);
     }
 
     public void Title()
     {
+        FindObjectOfType<AudioManager>().Play("MenuSelect");
         SceneManager.LoadScene(0);
     }
 }
