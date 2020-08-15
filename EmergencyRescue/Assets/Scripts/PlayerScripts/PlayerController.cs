@@ -5,16 +5,13 @@ using UnityEngine;
 public class PlayerController : HealthManager
 {
     public float speed;
+    public float maxSpeed;
+    public float percentCalc; //Finds the ratio of survivors multiplied by 100 
+    public float newPercent; //Calculates the percentage of speed available to move at with the current survivors on board 
     public int maxHealth;
     public float dashSpeed;
 
-    private float survivorAtTen = 0.75f;
-
-    private float survivorAtTwenty = 0.5f;
-
     public float invulnerableTimer = 0;
-
-    // public GameObject deathEffect;
 
     public GameObject[] hurtEffects;
 
@@ -35,20 +32,48 @@ public class PlayerController : HealthManager
     void Update()
     {
         FaceMouse();
+
+        if(GameManager.Instance().survivors == 0)
+        {
+            speed = maxSpeed;
+            Debug.Log("set to max");
+        }
+        else
+        {
+            percentCalc = GameManager.Instance().survivors / 30 * 100;
+            Debug.Log("Percent Calculation: " + percentCalc);
+            newPercent = (100 - percentCalc)/100;
+            Debug.Log("New Percent: " + newPercent);
+
+            speed = maxSpeed * newPercent;
+            Debug.Log("Speed: " + speed);
+        }
+
+        if(speed < 10)
+        {
+            speed = 10;
+        }
+
+        if(speed > maxSpeed)
+        {
+            speed = maxSpeed;
+        }
+        
+        Debug.Log("done calculating");
+        
+        // CalculateSpeed();
         Movement();       
         CheckBoundaries();
         Invulnerability();
-        //DamageEffect();
+        DamageEffect();
 
-        if(GameManager.Instance().assistShipSurvivorSaved >= 5)
+        if(GameManager.Instance().survivorsSaved >= 66)
         {
-            Debug.Log("5");
             assistShips[0].SetActive(true);
         }
 
-        if(GameManager.Instance().assistShipSurvivorSaved >= 10)
+        if(GameManager.Instance().survivorsSaved >= 132)
         {
-            Debug.Log("10");
             assistShips[1].SetActive(true);
         }
 
@@ -83,36 +108,47 @@ public class PlayerController : HealthManager
                 }
             }
         }
-        // else if(GameManager.Instance().survivors >= 10)
-        // {
-        //     velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-        //     velocity = velocity.normalized * speed * survivorAtTen * Time.deltaTime;
-        //     // Debug.Log("10");
-        // }
-        // else if(GameManager.Instance().survivors >= 20)
-        // {
-        //     velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-        //     velocity = velocity.normalized * speed * survivorAtTwenty * Time.deltaTime;
-        //     // Debug.Log("20");
-        // }
         else
         {
             velocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             velocity = velocity.normalized * speed * Time.deltaTime;
-            // Debug.Log("normal");
+            Debug.Log("Speed in Movement: " + speed);
         }
 
-        // _velocity += velocity * Time.deltaTime;
-        // var magnitude = _velocity.magnitude;
-        // if(magnitude > speed)
-        // {
-        //     _velocity *= speed / magnitude;
-        // }
-
-        // pos += _velocity;
         pos += velocity;
         transform.position = pos;
     }
+
+    // void CalculateSpeed()
+    // {
+    //     if(GameManager.Instance().survivors == 0)
+    //     {
+    //         speed = maxSpeed;
+    //         Debug.Log("set to max");
+    //     }
+    //     else
+    //     {
+    //         percentCalc = GameManager.Instance().survivors / 30 * 100;
+    //         Debug.Log("Percent Calculation: " + percentCalc);
+    //         newPercent = (100 - percentCalc)/100;
+    //         Debug.Log("New Percent: " + newPercent);
+
+    //         speed = maxSpeed * newPercent;
+    //         Debug.Log("Speed: " + speed);
+    //     }
+
+    //     if(speed < 10)
+    //     {
+    //         speed = 10;
+    //     }
+
+    //     if(speed > maxSpeed)
+    //     {
+    //         speed = maxSpeed;
+    //     }
+        
+    //     Debug.Log("done calculating");
+    // }
 
     void FaceMouse()
     {
@@ -156,7 +192,6 @@ public class PlayerController : HealthManager
         if(other.GetComponent<GameManager>())
         {
             GameManager.Instance().RescueSurvivors();
-            return;
         }
         
         if(other.GetComponent<SurvivorController>())
@@ -166,18 +201,6 @@ public class PlayerController : HealthManager
                 if(GameManager.Instance().survivors <= 29)
                 {
                     GameManager.Instance().onShipSurvivors++;
-                }
-                else if(GameManager.Instance().survivors >= 30)
-                {
-                    return;
-                }
-            }
-
-            if(other.GetComponent<AssistShipSurvivorsController>())
-            {
-                if(GameManager.Instance().survivors <= 29)
-                {
-                    GameManager.Instance().assistShipSurvivors++;
                 }
                 else if(GameManager.Instance().survivors >= 30)
                 {
@@ -253,20 +276,29 @@ public class PlayerController : HealthManager
     {
         if(currentHealth <= 7)
         {
-            var clone = Instantiate(hurtEffects[0], transform.position, transform.rotation);
-            Debug.Log("small");
-        }
+            hurtEffects[0].SetActive(true);
 
-        if(currentHealth <= 5)
-        {
-            var clone = Instantiate(hurtEffects[1], transform.position, transform.rotation);
-            Debug.Log("medium");
+            if(currentHealth <= 5)
+            {
+                hurtEffects[1].SetActive(true);
+
+                if(currentHealth <= 3)
+                {
+                    hurtEffects[2].SetActive(true);
+                }
+                else if(currentHealth > 3 && currentHealth <= 5)
+                {
+                    hurtEffects[2].SetActive(false);
+                }
+            }
+            else if(currentHealth > 5 && currentHealth <= 7)
+            {
+                hurtEffects[1].SetActive(false);
+            }
         }
-        
-        if(currentHealth <= 3)
+        else if(currentHealth > 7)
         {
-            var clone = Instantiate(hurtEffects[2], transform.position, transform.rotation);
-            Debug.Log("large");
+            hurtEffects[0].SetActive(false);
         }
         
         if(currentHealth == 0)

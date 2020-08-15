@@ -837,74 +837,55 @@ MonoBehaviour:
   - name: First Wave
     survivor: {fileID: 5225996827943069789, guid: 551a890659578c2418a388f61ee00ad9,
       type: 3}
-    assistSurvivors: {fileID: 8906359264199976436, guid: aeaf3020fa1b7a94fb4f4954e67f83a1,
-      type: 3}
     onShipSurvivors: {fileID: 7240737205378193571, guid: c3d8d39620c74fb43851772bd99c5be5,
       type: 3}
     kidnapEnemy: {fileID: 3309208971291476686, guid: 4070a97725643244485dc6f03e247871,
       type: 3}
     turretEnemy: {fileID: 1607723009048053409, guid: e272e3efa2c8b024d9a89ad1af7f1d55,
-      type: 3}
-    tankEnemy: {fileID: 1705482634041248944, guid: acc5a78992f373d40b68a652de72392f,
       type: 3}
     count: 2
     rate: 1
   - name: Second Wave
     survivor: {fileID: 5225996827943069789, guid: 551a890659578c2418a388f61ee00ad9,
       type: 3}
-    assistSurvivors: {fileID: 8906359264199976436, guid: aeaf3020fa1b7a94fb4f4954e67f83a1,
-      type: 3}
     onShipSurvivors: {fileID: 7240737205378193571, guid: c3d8d39620c74fb43851772bd99c5be5,
       type: 3}
     kidnapEnemy: {fileID: 3309208971291476686, guid: 4070a97725643244485dc6f03e247871,
       type: 3}
     turretEnemy: {fileID: 1607723009048053409, guid: e272e3efa2c8b024d9a89ad1af7f1d55,
-      type: 3}
-    tankEnemy: {fileID: 1705482634041248944, guid: acc5a78992f373d40b68a652de72392f,
       type: 3}
     count: 5
     rate: 1.5
   - name: Third Wave
     survivor: {fileID: 5225996827943069789, guid: 551a890659578c2418a388f61ee00ad9,
       type: 3}
-    assistSurvivors: {fileID: 8906359264199976436, guid: aeaf3020fa1b7a94fb4f4954e67f83a1,
-      type: 3}
     onShipSurvivors: {fileID: 7240737205378193571, guid: c3d8d39620c74fb43851772bd99c5be5,
       type: 3}
     kidnapEnemy: {fileID: 3309208971291476686, guid: 4070a97725643244485dc6f03e247871,
       type: 3}
     turretEnemy: {fileID: 1607723009048053409, guid: e272e3efa2c8b024d9a89ad1af7f1d55,
-      type: 3}
-    tankEnemy: {fileID: 1705482634041248944, guid: acc5a78992f373d40b68a652de72392f,
       type: 3}
     count: 10
     rate: 2
   - name: Fourth Wave
     survivor: {fileID: 5225996827943069789, guid: 551a890659578c2418a388f61ee00ad9,
       type: 3}
-    assistSurvivors: {fileID: 8906359264199976436, guid: aeaf3020fa1b7a94fb4f4954e67f83a1,
-      type: 3}
     onShipSurvivors: {fileID: 7240737205378193571, guid: c3d8d39620c74fb43851772bd99c5be5,
       type: 3}
     kidnapEnemy: {fileID: 3309208971291476686, guid: 4070a97725643244485dc6f03e247871,
       type: 3}
     turretEnemy: {fileID: 1607723009048053409, guid: e272e3efa2c8b024d9a89ad1af7f1d55,
       type: 3}
-    tankEnemy: {fileID: 1705482634041248944, guid: acc5a78992f373d40b68a652de72392f,
-      type: 3}
     count: 15
     rate: 2.5
   survivorSpawnPoints:
   - {fileID: 4003936573921280605}
   - {fileID: 4003936575256297741}
-  - {fileID: 4003936573347482761}
-  - {fileID: 4003936574121513777}
+  - {fileID: 4003936574901682932}
+  - {fileID: 4003936574635082290}
   kidnapEnemySpawnPoints:
   - {fileID: 1932779619236331403, guid: 43379b3322c03034d947c38222f340c1, type: 3}
   - {fileID: 8208313348068949180, guid: daf8d0bac2029b242a22e17b1f5856f3, type: 3}
-  tankEnemySpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
   turretEnemySpawnPoints:
   - {fileID: 4003936573347482761}
   - {fileID: 4003936574437827355}
@@ -912,6 +893,7 @@ MonoBehaviour:
   - {fileID: 4003936574121513777}
   survivorSpawnDistance: 5
   turretSpawnDistance: 5
+  player: {fileID: 0}
 --- !u!1 &4003936575335978269
 GameObject:
   m_ObjectHideFlags: 0

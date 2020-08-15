@@ -18,7 +18,6 @@ public class BasicEnemyController : EnemyController
 
         if(currentHealth <= 0)
         {
-            Debug.Log("currenthealth <= 0");
             Die();
         }
     }
@@ -57,17 +56,16 @@ public class BasicEnemyController : EnemyController
     public override void Die()
     {
         EnemySpawner.Instance().currentEnemies--;
-        Debug.Log("Current Enemies Updated: " + EnemySpawner.Instance().currentEnemies);
 
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
         var clone = Instantiate(deathEffect, transform.position, transform.rotation);
         
         Destroy(clone, 1f);
+
         Destroy(gameObject);
 
-        RandomDrop();
-
         GameManager.Instance().AddScore();
-        Debug.Log("score updated");
+
+        RandomDrop();
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
+    private static WaveSpawner _instance;
+
     public enum spawnState { SPAWNING, WAITING, COUNTING};
 
     [System.Serializable]
@@ -11,7 +13,6 @@ public class WaveSpawner : MonoBehaviour
     {
         public string name;
         public Transform survivor;
-        public Transform assistSurvivors;
         public Transform onShipSurvivors;
         public Transform kidnapEnemy;
         public Transform turretEnemy;
@@ -23,18 +24,38 @@ public class WaveSpawner : MonoBehaviour
     private int nextWave = 0;
 
     public Transform[] survivorSpawnPoints;
+    public bool survivorSpawn1;
+    public bool survivorSpawn2;
+    public bool survivorSpawn3;
+    public bool survivorSpawn4;
     public Transform[] kidnapEnemySpawnPoints;
     public Transform[] turretEnemySpawnPoints;
 
     public float survivorSpawnDistance;
     public float turretSpawnDistance;
-
-
-
     private float timerBetweenWaves = 10f;
     private float waveCountDown;
 
+    private Transform _sp;
+
     private spawnState state = spawnState.COUNTING;
+
+    public static WaveSpawner Instance()
+    {
+        if(_instance == null)
+        {
+            GameObject go = new GameObject("WaveSpawner");
+            go.AddComponent<WaveSpawner>();
+        }
+
+        return _instance;
+    }
+
+    void Awake() 
+    {
+        _instance = this;
+    }
+
 
     void Start()
     {
@@ -81,14 +102,49 @@ public class WaveSpawner : MonoBehaviour
     {
         state = spawnState.SPAWNING;
 
-        Transform _sp = survivorSpawnPoints[Random.Range(0, survivorSpawnPoints.Length)];
+        _sp = survivorSpawnPoints[Random.Range(0, survivorSpawnPoints.Length)];
+
+        if(_sp == survivorSpawnPoints[0])
+        {
+            survivorSpawn1 = true;
+        }
+        else
+        {
+            survivorSpawn1 = false;
+        }
+
+        if(_sp == survivorSpawnPoints[1])
+        {
+            survivorSpawn2 = true;
+        }
+        else
+        {
+            survivorSpawn2 = false;
+        }
+
+        if(_sp == survivorSpawnPoints[2])
+        {
+            survivorSpawn3 = true;
+        }
+        else
+        {
+            survivorSpawn3 = false;
+        }
+
+        if(_sp == survivorSpawnPoints[3])
+        {
+            survivorSpawn4 = true;
+        }
+        else
+        {
+            survivorSpawn4 = false;
+        }
+        
             
         // Spawn
         for(int i = 0; i < _wave.count; i++)
         {
-
             SpawnSurvivor(_wave.survivor, _sp);
-            SpawnExtraSurvivor(_wave.assistSurvivors, _sp);
             SpawnOnShipSurvivor(_wave.onShipSurvivors, _sp);
             SpawnTurretEnemy(_wave.turretEnemy);
             SpawnKidnapEnemy(_wave.kidnapEnemy);
@@ -127,17 +183,6 @@ public class WaveSpawner : MonoBehaviour
         Instantiate(survivor, spawnlocation.position + offset, spawnlocation.rotation);
     }
 
-    void SpawnExtraSurvivor(Transform assistSurvivors, Transform spawnlocation)
-    {
-        Vector3 offset = Random.onUnitSphere;
-        offset.z = 0;
-
-        offset = offset.normalized * survivorSpawnDistance;
-
-        //Spawn survivors
-        Instantiate(assistSurvivors, spawnlocation.position + offset, spawnlocation.rotation);
-    }
-
     void SpawnOnShipSurvivor(Transform onShipSurvivors, Transform spawnlocation)
     {
         Vector3 offset = Random.onUnitSphere;
@@ -151,26 +196,26 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnTurretEnemy(Transform turret)
     {
-        Transform _sp = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
+        Transform _spturret = turretEnemySpawnPoints[Random.Range(0, turretEnemySpawnPoints.Length)];
 
         Vector3 offset = Random.onUnitSphere;
         offset.z = 0;
 
-        offset = offset.normalized * survivorSpawnDistance;
+        offset = offset.normalized * turretSpawnDistance;
 
         //Spawning
-        Instantiate(turret, _sp.position + offset, _sp.rotation);
+        Instantiate(turret, _spturret.position + offset, _spturret.rotation);
     }
 
     void SpawnKidnapEnemy(Transform kidnapEnemy)
     {
-        Transform _sp = kidnapEnemySpawnPoints[Random.Range(0, kidnapEnemySpawnPoints.Length)];
+        Transform _spkidnap = kidnapEnemySpawnPoints[Random.Range(0, kidnapEnemySpawnPoints.Length)];
         Vector3 offset = Random.onUnitSphere;
         offset.z = 0;
 
         offset = offset.normalized * survivorSpawnDistance;
 
         //Spawn enemies
-        Instantiate(kidnapEnemy, _sp.position + offset, _sp.rotation);
+        Instantiate(kidnapEnemy, _spkidnap.position + offset, _spkidnap.rotation);
     }
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TankEnemyShooter : EnemyShooter
 {
+    public GameObject specialBulletHolder;
+    public Transform[] specialFirePoints;
+    public bool specialAvailable = false;
+    public GameObject specialBulletPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +21,25 @@ public class TankEnemyShooter : EnemyShooter
         Target();
         
         cooldownTimer -= Time.deltaTime;
+
         if(cooldownTimer <= 0 && player != null && Vector3.Distance(transform.position, player.position) < 15)
         {
             cooldownTimer = fireDelay;
             BossShot();
+
+            if(specialAvailable)
+            {
+                SpecialShot();
+            }
+        }
+
+        if(!specialAvailable)
+        {
+            if(gameObject.GetComponent<TankEnemyController>().currentHealth <= 15)
+            {
+                specialAvailable = true;
+                SetSpecialShot();
+            }
         }
 
     }
@@ -28,8 +48,6 @@ public class TankEnemyShooter : EnemyShooter
     {
         for(int i = 0; i < firePoints.Length; i++)
         {
-            Vector3 v = (firePoints[i].transform.position - transform.position).normalized;
-            // Quaternion rot = Quaternion.FromToRotation(Vector3.up, v); //research this
             GameObject enemyBullet = Instantiate(bulletPrefab, firePoints[i].position, firePoints[i].rotation);
             enemyBullet.tag = gameObject.tag;
             Rigidbody2D rb = enemyBullet.GetComponent<Rigidbody2D>();
@@ -37,10 +55,22 @@ public class TankEnemyShooter : EnemyShooter
         } 
     }
 
-    // public override void BasicEnemyShot()
-    // {
-    //     GameObject enemyBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-    //     Rigidbody2D rb = enemyBullet.GetComponent<Rigidbody2D>(); 
-    //     rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse); 
-    // }
+    public void SpecialShot()
+    {
+        for(int i = 0; i < specialFirePoints.Length; i++)
+        {
+            GameObject specialBullet = Instantiate(specialBulletPrefab, specialFirePoints[i].position, specialFirePoints[i].rotation);
+            specialBullet.tag = gameObject.tag;
+            Rigidbody2D rb = specialBullet.GetComponent<Rigidbody2D>();
+            rb.AddForce(specialFirePoints[i].up * bulletForce, ForceMode2D.Impulse);
+        }
+    }
+
+    public void SetSpecialShot()
+    {
+        for(int i = 0; i < 1; i++)
+        {
+            specialBulletHolder.SetActive(true);
+        }
+    }
 }

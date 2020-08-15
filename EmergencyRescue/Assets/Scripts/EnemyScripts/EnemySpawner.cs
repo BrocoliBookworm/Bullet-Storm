@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     float spawnDistance = 25f;
 
     public int currentEnemies;
-    private int maxEnemies = 10;
+    private int enemyCap = 50;
 
     public static EnemySpawner Instance()
     {
@@ -44,51 +44,86 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.Instance().survivorsSaved < 30)
+        if(GameManager.Instance().survivorsSaved <= 30)
         {
-            if(currentEnemies < maxEnemies)
+            enemyCap = 10;
+
+            if(currentEnemies < enemyCap)
             {
-                Debug.Log("max is 10");
                 Spawn();
             }
             else
             {
-                Debug.Log("max");
                 return;
             }
         }
-        else if(GameManager.Instance().survivorsSaved > 50)
+        else if(GameManager.Instance().survivorsSaved > 31)
         {
-            if(GameManager.Instance().survivorsSaved > 75)
+            if(GameManager.Instance().survivorsSaved >= 60 && GameManager.Instance().survivorsSaved <= 90)
             {
-                maxEnemies = 50;
+                enemyCap = 15;
 
-                if(currentEnemies < maxEnemies)
+                if(currentEnemies < enemyCap)
                 {
-                    Debug.Log("max is 50");
                     Spawn();
                 }
                 else
                 {
-                    Debug.Log("max");
                     return;
                 }   
             }
-            else
+            else if(GameManager.Instance().survivorsSaved > 90 && GameManager.Instance().survivorsSaved <= 120)
             {
-                maxEnemies = 25;
+                enemyCap = 25;
 
-                if(currentEnemies < maxEnemies)
+                if(currentEnemies < enemyCap)
                 {
-                    Debug.Log("max is 25");
                     Spawn();
                 }
                 else
                 {
-                    Debug.Log("max");
                     return;
-                }      
-            }  
+                }   
+            }
+            else if(GameManager.Instance().survivorsSaved > 120 && GameManager.Instance().survivorsSaved <= 150)
+            {
+                enemyCap = 30;
+
+                if(currentEnemies < enemyCap)
+                {
+                    Spawn();
+                }
+                else
+                {
+                    return;
+                }   
+            }
+            else if(GameManager.Instance().survivorsSaved > 150 && GameManager.Instance().survivorsSaved <= 180)
+            {
+                enemyCap = 38;
+
+                if(currentEnemies < enemyCap)
+                {
+                    Spawn();
+                }
+                else
+                {
+                    return;
+                }   
+            }
+            else if(GameManager.Instance().survivorsSaved > 180)
+            {
+                enemyCap = 50;
+
+                if(currentEnemies < enemyCap)
+                {
+                    Spawn();
+                }
+                else
+                {
+                    return;
+                }   
+            }
         }
     }
 
@@ -103,7 +138,19 @@ public class EnemySpawner : MonoBehaviour
             //Sets a bare minimum timer for spawning in enemies
             if(enemyRate < 2)
             {
-                enemyRate = 1.5f;
+                if(GameManager.Instance().survivorsSaved >= 66)
+                {
+                    enemyRate = 1f;
+
+                    if(GameManager.Instance().survivorsSaved >= 132)
+                    {
+                        enemyRate = 0.5f;
+                    }
+                }
+                else
+                {
+                    enemyRate = 1.5f;
+                }
             }
 
             //Creates an offset in a random area in a sphere
@@ -116,7 +163,6 @@ public class EnemySpawner : MonoBehaviour
             //spawns the enemies
             Instantiate(EPrefab, transform.position + offset, Quaternion.identity);
             currentEnemies++;
-            Debug.Log("Current Enemies: " + currentEnemies);
         }
     }
 }

@@ -47,9 +47,8 @@ public class GameManager : MonoBehaviour
     public int score;
     public int survivors;
     public int onShipSurvivors;
-    public int assistShipSurvivors;
-    public int assistShipSurvivorSaved;
     public int survivorsSaved;
+    public int survivorsWin = 200;
 
     public Transform thePlayerShip;
     private int addScore = 10;
@@ -58,6 +57,7 @@ public class GameManager : MonoBehaviour
     {
         _instance = this;
     }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         survivors = 0;
         survivorsSaved = 0;
         onShipSurvivors = 0;
-        assistShipSurvivors = 0;
+
         Instantiate(thePlayer, transform.position, Quaternion.identity); 
         thePlayerShip = thePlayer.transform;
     }
@@ -87,11 +87,9 @@ public class GameManager : MonoBehaviour
 
         if(survivorsSaved >= 25)
         {
-            firstSpawn = true;
-
             if(!bossSpawned)
             {
-                if(!firstSpawn)
+                if(firstSpawn)
                 {
                     bossSpawnTimer -= Time.deltaTime;
                     
@@ -103,6 +101,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
+                    firstSpawn = true;
                     bossSpawned = true;
                     Instantiate(theBoss, bossSpawnPoint.position, bossSpawnPoint.rotation);
                 }
@@ -148,21 +147,12 @@ public class GameManager : MonoBehaviour
             survivorsSaved += survivors;
         }
 
-        if(survivorsSaved >= 199)
+        if(survivorsSaved >= survivorsWin)
         {
             if(!won)
             {
                 WinGame();
             }
-        }
-
-        if(assistShipSurvivorSaved == 0)
-        {
-            assistShipSurvivorSaved = assistShipSurvivors;
-        }
-        else
-        {
-            assistShipSurvivorSaved += assistShipSurvivors;
         }
 
         survivors = 0;
