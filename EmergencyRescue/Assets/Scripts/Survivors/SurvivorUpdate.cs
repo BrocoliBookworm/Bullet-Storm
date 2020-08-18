@@ -16,7 +16,7 @@ public class SurvivorUpdate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateSurvivors();
+
     }
 
     public void UpdateSurvivors()

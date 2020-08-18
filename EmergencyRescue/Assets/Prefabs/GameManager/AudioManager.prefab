@@ -47,7 +47,7 @@ MonoBehaviour:
   sounds:
   - name: ShotSound
     clip: {fileID: 8300000, guid: d869316c81f6fcd40b09306d65365189, type: 3}
-    volume: 0.8
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -82,6 +82,18 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: DropOff
+    clip: {fileID: 8300000, guid: d87061cd0899ffb46a5fdf6a7517a2aa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SurvivorRescue
+    clip: {fileID: 8300000, guid: c8e7862ac9fb6fe4faab84a9db993e4a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WeaponShotChange
     clip: {fileID: 8300000, guid: 1a0a0adb15c6cad49ae4d146f13dd8bf, type: 3}
     volume: 1
     pitch: 1

@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class PlayerController : HealthManager
 {
-    public float speed;
-    public float maxSpeed;
-    public float percentCalc; //Finds the ratio of survivors multiplied by 100 
-    public float newPercent; //Calculates the percentage of speed available to move at with the current survivors on board 
-    public int maxHealth;
-    public float dashSpeed;
+    private float speed;
+    private float maxSpeed = 15f;
+    private float percentCalc; //Finds the ratio of survivors multiplied by 100 
+    private float newPercent; //Calculates the percentage of speed available to move at with the current survivors on board 
+    private int maxHealth = 10;   //public int maxHealth { get; private set; }
+    private float dashSpeed = 200f;
 
-    public float invulnerableTimer = 0;
+    private float invulnerableTimer = 0;
 
     public GameObject[] hurtEffects;
 
     public GameObject[] assistShips;
 
     Vector3 velocity;
-    public float maxHeight;
-    public float minHeight;
-    public float leftDistance;
-    public float rightDistance;
+    private float maxHeight = 44f;
+    private float minHeight = -65.5f;
+    private float leftDistance = -52.6f;
+    private float rightDistance = 58.1f;
 
     void Start()
     {
@@ -36,17 +36,13 @@ public class PlayerController : HealthManager
         if(GameManager.Instance().survivors == 0)
         {
             speed = maxSpeed;
-            Debug.Log("set to max");
         }
         else
         {
-            percentCalc = GameManager.Instance().survivors / 30 * 100;
-            Debug.Log("Percent Calculation: " + percentCalc);
-            newPercent = (100 - percentCalc)/100;
-            Debug.Log("New Percent: " + newPercent);
+            percentCalc = GameManager.Instance().survivors / 30f; //take out 100 and change 1 - percentCalc to 1
+            newPercent = 1 - percentCalc;
 
             speed = maxSpeed * newPercent;
-            Debug.Log("Speed: " + speed);
         }
 
         if(speed < 10)
@@ -58,9 +54,7 @@ public class PlayerController : HealthManager
         {
             speed = maxSpeed;
         }
-        
-        Debug.Log("done calculating");
-        
+                
         // CalculateSpeed();
         Movement();       
         CheckBoundaries();
@@ -112,7 +106,6 @@ public class PlayerController : HealthManager
         {
             velocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             velocity = velocity.normalized * speed * Time.deltaTime;
-            Debug.Log("Speed in Movement: " + speed);
         }
 
         pos += velocity;
@@ -177,7 +170,7 @@ public class PlayerController : HealthManager
         {
             return;
         }
-        else if(other.GetComponent<Bullet>() || other.GetComponent<KidnapEnemyController>() || other.GetComponent<BasicEnemyController>() || other.GetComponent<TurretEnemyController>())
+        else if(other.GetComponent<Bullet>() || other.GetComponent<KidnapEnemyController>() || other.GetComponent<TankEnemyController>() || other.GetComponent<BasicEnemyController>() || other.GetComponent<TurretEnemyController>())
         {
             TakeDamage(1);
             return;
@@ -191,7 +184,10 @@ public class PlayerController : HealthManager
         
         if(other.GetComponent<GameManager>())
         {
-            GameManager.Instance().RescueSurvivors();
+            if(GameManager.Instance().survivors >= 1)
+            {
+                GameManager.Instance().RescueSurvivors();
+            }
         }
         
         if(other.GetComponent<SurvivorController>())
@@ -200,6 +196,7 @@ public class PlayerController : HealthManager
             {
                 if(GameManager.Instance().survivors <= 29)
                 {
+                    FindObjectOfType<AudioManager>().Play("SurvivorRescue");
                     GameManager.Instance().onShipSurvivors++;
                 }
                 else if(GameManager.Instance().survivors >= 30)
@@ -210,6 +207,7 @@ public class PlayerController : HealthManager
 
             if(GameManager.Instance().survivors <= 29)
             {
+                FindObjectOfType<AudioManager>().Play("SurvivorRescue");
                 GameManager.Instance().AddSurvivors();
             }
             else if(GameManager.Instance().survivors >= 30)

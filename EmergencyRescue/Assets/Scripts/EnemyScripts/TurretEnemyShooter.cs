@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TurretEnemyShooter : EnemyShooter
 {
+    private bool hasShotAlready = false;
+    private float delay = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +17,36 @@ public class TurretEnemyShooter : EnemyShooter
     void Update()
     {
         Target();
-
-        cooldownTimer -= Time.deltaTime;
-        if(cooldownTimer <= 0 && player != null && Vector3.Distance(transform.position, player.position) < 15)
+        
+        if(!hasShotAlready)
         {
-            cooldownTimer = fireDelay;
-            TurretShot();
+
+            if(player != null && Vector3.Distance(transform.position, player.position) < 15)
+            {
+                delay -= Time.deltaTime;
+                
+                if(delay <= 0)
+                {
+                    TurretShot();
+                    hasShotAlready = true;
+                }
+            }
+        }
+
+    
+
+        if(hasShotAlready)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            if(cooldownTimer <= 0 && player != null && Vector3.Distance(transform.position, player.position) < 15)
+            {
+                cooldownTimer = fireDelay;
+                TurretShot();
+            }
         }
     }
+
 
     public override void TurretShot()
     {

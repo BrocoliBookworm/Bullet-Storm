@@ -70,9 +70,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6144887722519106102}
   - component: {fileID: 6144887722519106097}
-  - component: {fileID: 843442714}
   - component: {fileID: 870145885}
   - component: {fileID: 2113596697}
+  - component: {fileID: 2059256436161393596}
   m_Layer: 9
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -119,41 +119,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &843442714
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6144887722519106098}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.11718616, y: 0.23702648}
-      - {x: -0.11156462, y: 0.23975813}
-      - {x: -0.20928548, y: 0.048927534}
-      - {x: -0.27566788, y: -0.070423685}
-      - {x: -0.28090784, y: -0.1307992}
-      - {x: -0.09153538, y: -0.23682028}
-      - {x: 0.08469479, y: -0.2383249}
-      - {x: 0.2809722, y: -0.14157452}
-      - {x: 0.26690897, y: -0.057439223}
-      - {x: 0.2304965, y: 0.010993552}
 --- !u!114 &870145885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +163,22 @@ MonoBehaviour:
   fireDelay: 2
   player: {fileID: 0}
   cooldownTimer: 0
+--- !u!58 &2059256436161393596
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144887722519106098}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &6144887723947028942
 GameObject:
   m_ObjectHideFlags: 0

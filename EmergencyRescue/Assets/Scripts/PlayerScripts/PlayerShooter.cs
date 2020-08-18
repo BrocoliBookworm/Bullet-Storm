@@ -9,13 +9,13 @@ public class PlayerShooter : MonoBehaviour
     public GameObject tripleBulletPrefab;
     public GameObject explosiveShotPrefab;
 
-    public float reloadTimer = 0.1f;
+    protected float reloadTimer = 0.1f;
 
-    public bool shotAvailable = true;
+    protected bool shotAvailable = true;
 
     private float explosiveTimer = 5f;
     private bool explosiveAvailable = false;
-    public float bulletForce;
+    protected float bulletForce = 30f;
 
     void Start()
     {

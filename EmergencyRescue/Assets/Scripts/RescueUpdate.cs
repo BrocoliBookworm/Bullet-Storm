@@ -16,7 +16,7 @@ public class RescueUpdate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateRescue();
+
     }
 
     public void UpdateRescue()

@@ -7,8 +7,14 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    
+    [SerializeField]
     private TextUpdate textUpdate;
+
+    [SerializeField]
     private SurvivorUpdate survivorUpdate;
+
+    [SerializeField]
     private RescueUpdate rescueUpdate;
 
     public GameObject thePlayer;
@@ -21,17 +27,20 @@ public class GameManager : MonoBehaviour
     public GameObject deathEffect;
     public GameObject survivorSavedEffect;
 
-    public static bool won = false;
+    private static bool won = false;
 
-    public static bool playing = false;
+    private static bool playing = false;
 
-    public static bool gamePaused = false;
+    private static bool gamePaused = false;
 
-    public GameObject winUI;
+    [SerializeField]
+    private GameObject winUI;
 
-    public GameObject pauseUI;
+    [SerializeField]
+    private GameObject pauseUI;
 
-    public GameObject deathUI;
+    [SerializeField]
+    private GameObject deathUI;
 
     public static GameManager Instance()
     {
@@ -95,6 +104,7 @@ public class GameManager : MonoBehaviour
                     
                     if(bossSpawnTimer <= 0)
                     {
+                        bossSpawnTimer = 45f;
                         bossSpawned = true;
                         Instantiate(theBoss, bossSpawnPoint.position, bossSpawnPoint.rotation);
                     }
@@ -198,9 +208,9 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
+        Time.timeScale = 1f;
         pauseUI.SetActive(false);
         winUI.SetActive(false);
-        Time.timeScale = 1f;
         gamePaused = false;
         playing = true;
     }

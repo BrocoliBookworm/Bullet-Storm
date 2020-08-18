@@ -16,7 +16,7 @@ public class TextUpdate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateScore();
+
     }
 
     public void UpdateScore()

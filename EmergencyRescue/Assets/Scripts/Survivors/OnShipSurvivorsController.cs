@@ -13,6 +13,6 @@ public class OnShipSurvivorsController : SurvivorController
     // Update is called once per frame
     void Update()
     {
-        
+        Death();
     }
 }

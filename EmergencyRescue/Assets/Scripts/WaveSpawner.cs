@@ -31,8 +31,8 @@ public class WaveSpawner : MonoBehaviour
     public Transform[] kidnapEnemySpawnPoints;
     public Transform[] turretEnemySpawnPoints;
 
-    public float survivorSpawnDistance;
-    public float turretSpawnDistance;
+    private float survivorSpawnDistance = 5f;
+    private float turretSpawnDistance = 7f;
     private float timerBetweenWaves = 10f;
     private float waveCountDown;
 
