@@ -187,7 +187,6 @@ public class GameManager : MonoBehaviour
         Destroy(clone);
         Invoke("UICall", 1f);
         
-        Destroy(thePlayer);
         // Time.timeScale = 0f;
         // deathUI.SetActive(true);
     }

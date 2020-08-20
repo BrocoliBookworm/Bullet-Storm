@@ -59,12 +59,7 @@ public class EnemyController : HealthManager
         {
             if(gameObject.GetComponent<KidnapEnemyController>().success != true)
             {
-                if(other.GetComponent<AssistShipSurvivorsController>())
-                {
-                    Destroy(other.gameObject);
-                    gameObject.GetComponent<KidnapEnemyController>().assistSurvivor = true;
-                }
-                else if(other.GetComponent<OnShipSurvivorsController>())
+                if(other.GetComponent<OnShipSurvivorsController>())
                 {
                     Destroy(other.gameObject);
                     gameObject.GetComponent<KidnapEnemyController>().shipSurvivor = true;

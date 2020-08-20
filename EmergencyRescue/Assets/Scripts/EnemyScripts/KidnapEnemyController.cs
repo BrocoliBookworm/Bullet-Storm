@@ -8,7 +8,6 @@ public class KidnapEnemyController : EnemyController
     public Transform warpEastTarget;
     public Transform warpWestTarget;
     public GameObject survivorObject;
-    public GameObject assistSurvivorObject;
     public GameObject onShipSurvivorObject;
     public bool assistSurvivor = false;
     public bool shipSurvivor = false;
@@ -33,11 +32,6 @@ public class KidnapEnemyController : EnemyController
         if(shipSurvivor)
         {
             Instantiate(onShipSurvivorObject, spawnPoint.position, spawnPoint.rotation);
-        }
-        
-        if(assistSurvivor)
-        {
-            Instantiate(assistSurvivorObject, spawnPoint.position, spawnPoint.rotation);
         }
         
         if(regularSurvivor)
@@ -113,6 +107,7 @@ public class KidnapEnemyController : EnemyController
         else
         {
             success = true;
+            survivor = null;
         }
     }
 
