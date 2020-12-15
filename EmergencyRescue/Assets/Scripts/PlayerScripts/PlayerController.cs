@@ -9,7 +9,7 @@ public class PlayerController : HealthManager
     private float percentCalc; //Finds the ratio of survivors multiplied by 100 
     private float newPercent; //Calculates the percentage of speed available to move at with the current survivors on board 
     private int maxHealth = 10;   //public int maxHealth { get; private set; }
-    private float dashSpeed = 200f;
+    // private float dashSpeed = 200f;
 
     private float invulnerableTimer = 0;
 
@@ -77,71 +77,38 @@ public class PlayerController : HealthManager
         }
     }
 
-    Vector3 _velocity;
-
     public void Movement()
     {
         Vector3 pos = transform.position;
 
-        if(Input.GetButtonDown("Fire3"))
-        {
-            if(StaminaBar.instance.equalized)
-            {
-                StaminaBar.instance.UseStamina();
-                if(Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") == 0)
-                {
-                    velocity = new Vector3(0, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
-                }
-                else if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") == 0)
-                {
-                    velocity = new Vector3(Input.GetAxis("Horizontal") * dashSpeed * Time.deltaTime, 0, 0);
-                }
-                else if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
-                {
-                    velocity = new Vector3(Input.GetAxis("Horizontal") * dashSpeed * Time.deltaTime, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
-                }
-            }
-        }
-        else
-        {
+        // if(Input.GetButtonDown("Fire3"))
+        // {
+        //     if(StaminaBar.instance.equalized)
+        //     {
+        //         StaminaBar.instance.UseStamina();
+        //         if(Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") == 0)
+        //         {
+        //             velocity = new Vector3(0, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
+        //         }
+        //         else if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") == 0)
+        //         {
+        //             velocity = new Vector3(Input.GetAxis("Horizontal") * dashSpeed * Time.deltaTime, 0, 0);
+        //         }
+        //         else if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
+        //         {
+        //             velocity = new Vector3(Input.GetAxis("Horizontal") * dashSpeed * Time.deltaTime, Input.GetAxis("Vertical") * dashSpeed * Time.deltaTime, 0);
+        //         }
+        //     }
+        // }
+        // else
+        // {
             velocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             velocity = velocity.normalized * speed * Time.deltaTime;
-        }
+        // }
 
         pos += velocity;
         transform.position = pos;
     }
-
-    // void CalculateSpeed()
-    // {
-    //     if(GameManager.Instance().survivors == 0)
-    //     {
-    //         speed = maxSpeed;
-    //         Debug.Log("set to max");
-    //     }
-    //     else
-    //     {
-    //         percentCalc = GameManager.Instance().survivors / 30 * 100;
-    //         Debug.Log("Percent Calculation: " + percentCalc);
-    //         newPercent = (100 - percentCalc)/100;
-    //         Debug.Log("New Percent: " + newPercent);
-
-    //         speed = maxSpeed * newPercent;
-    //         Debug.Log("Speed: " + speed);
-    //     }
-
-    //     if(speed < 10)
-    //     {
-    //         speed = 10;
-    //     }
-
-    //     if(speed > maxSpeed)
-    //     {
-    //         speed = maxSpeed;
-    //     }
-        
-    //     Debug.Log("done calculating");
-    // }
 
     void FaceMouse()
     {

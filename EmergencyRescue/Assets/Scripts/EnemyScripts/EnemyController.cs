@@ -42,36 +42,17 @@ public class EnemyController : HealthManager
             }
         }
 
-        // if(other.GetComponent<ExplodingBullet>())
-        // {
-        //     CollideWithBullet(3);
-        //     Debug.Log("damage3");
-        //     return;
-        // }
-
         if(other.GetComponent<PlayerController>())
         {
             CollideWithPlayer();
             return;
         }
-
-        if(other.GetComponent<SurvivorController>())
+        
+        var survivor = other.GetComponent<SurvivorController>();
+        
+        if(survivor != null)
         {
-            if(gameObject.GetComponent<KidnapEnemyController>().success != true)
-            {
-                if(other.GetComponent<OnShipSurvivorsController>())
-                {
-                    Destroy(other.gameObject);
-                    gameObject.GetComponent<KidnapEnemyController>().shipSurvivor = true;
-                }
-                else
-                {
-                    Destroy(other.gameObject);
-                    gameObject.GetComponent<KidnapEnemyController>().regularSurvivor = true;
-                }
-
-                CollideWithSurvivor();
-            }
+            CollideWithSurvivor(survivor);
             return;
         }
 
@@ -121,7 +102,7 @@ public class EnemyController : HealthManager
         currentHealth--;
     }
 
-    protected virtual void CollideWithSurvivor()
+    protected virtual void CollideWithSurvivor(SurvivorController survivor)
     {
 
     }

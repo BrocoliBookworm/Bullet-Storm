@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private RescueUpdate rescueUpdate;
 
+    private float startTimer = 10f;
+
     public GameObject thePlayer;
     public GameObject theBoss;
     public bool bossSpawned = false;
@@ -35,6 +37,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject winUI;
+
+    [SerializeField]
+    private GameObject SurvivorLocater;
 
     [SerializeField]
     private GameObject pauseUI;
@@ -75,13 +80,16 @@ public class GameManager : MonoBehaviour
         survivors = 0;
         survivorsSaved = 0;
         onShipSurvivors = 0;
+        SurvivorLocater.SetActive(false);
 
         Instantiate(thePlayer, transform.position, Quaternion.identity); 
         thePlayerShip = thePlayer.transform;
     }
 
     void Update()
-    {
+    {   
+        StartSurvivorLocater();
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(gamePaused)
@@ -168,6 +176,16 @@ public class GameManager : MonoBehaviour
         survivors = 0;
         survivorUpdate.UpdateSurvivors();  
         rescueUpdate.UpdateRescue();
+    }
+
+    void StartSurvivorLocater()
+    {
+        startTimer -= Time.deltaTime;
+
+        if(startTimer <= 0)
+        {
+            SurvivorLocater.SetActive(true);
+        }
     }
 
     public void WinGame()

@@ -5,13 +5,7 @@ using UnityEngine;
 public class TurretEnemyShooter : EnemyShooter
 {
     private bool hasShotAlready = false;
-    private float delay = 5f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float delay = 2f;
 
     // Update is called once per frame
     void Update()

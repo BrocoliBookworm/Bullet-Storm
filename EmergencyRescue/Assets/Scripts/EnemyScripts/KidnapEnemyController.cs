@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class KidnapEnemyController : EnemyController
 {
-    public Transform survivor;
+    public Transform targetLocation;
     public Transform warpEastTarget;
     public Transform warpWestTarget;
     public GameObject survivorObject;
     public GameObject onShipSurvivorObject;
-    public bool assistSurvivor = false;
     public bool shipSurvivor = false;
     public bool regularSurvivor = false;
 
@@ -42,7 +41,7 @@ public class KidnapEnemyController : EnemyController
 
     public override void Target()
     {
-        if(survivor == null)
+        if(targetLocation == null)
         {
             if(success != true)
             {
@@ -50,7 +49,7 @@ public class KidnapEnemyController : EnemyController
             
                 if(target != null)
                 {
-                    survivor = target.transform;
+                    targetLocation = target.transform;
                 }
             }
 
@@ -58,21 +57,21 @@ public class KidnapEnemyController : EnemyController
             {
                 if(Random.value > 0.5)
                 {
-                    survivor = warpEastTarget.transform;
+                    targetLocation = warpEastTarget.transform;
                 }
                 else
                 {
-                    survivor = warpWestTarget.transform;
+                    targetLocation = warpWestTarget.transform;
                 }
             }
         }
         
-        if(survivor == null)
+        if(targetLocation == null)
         {
             return;
         }
 
-        Vector3 dir = survivor.position - transform.position;
+        Vector3 dir = targetLocation.position - transform.position;
         dir.Normalize();
 
         float zAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
@@ -98,7 +97,7 @@ public class KidnapEnemyController : EnemyController
         GameManager.Instance().AddScore();
     }
 
-    protected override void CollideWithSurvivor()
+    protected override void CollideWithSurvivor(SurvivorController survivor)
     {
         if(success)
         {
@@ -106,8 +105,19 @@ public class KidnapEnemyController : EnemyController
         }
         else
         {
+            if(survivor.GetComponent<OnShipSurvivorsController>())
+            {
+                Destroy(survivor.gameObject);
+                shipSurvivor = true;
+            }
+            else
+            {
+                Destroy(survivor.gameObject);
+                regularSurvivor = true;
+            }
+
             success = true;
-            survivor = null;
+            targetLocation = null;
         }
     }
 

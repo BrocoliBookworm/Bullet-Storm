@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public static AudioManager instance;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,6 +32,13 @@ public class AudioManager : MonoBehaviour
             i.source.pitch = i.pitch;
             i.source.loop = i.loop;
         }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        Play("BackgroundMusic");
     }
 
     public void Play(string name)

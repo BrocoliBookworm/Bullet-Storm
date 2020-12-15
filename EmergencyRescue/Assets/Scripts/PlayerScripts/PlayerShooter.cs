@@ -72,7 +72,7 @@ public class PlayerShooter : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>(); //Access the bullets rigidbody2d component
         rb.AddForce(centralFirepoint.up * bulletForce, ForceMode2D.Impulse); // Puts force on the bullet
 
-        FindObjectOfType<AudioManager>().Play("ShotSound");
+        // FindObjectOfType<AudioManager>().Play("ShotSound");
     }
 
     void TripleShot()
@@ -84,7 +84,7 @@ public class PlayerShooter : MonoBehaviour
             rb[i].AddForce(rb[i].transform.up * bulletForce, ForceMode2D.Impulse);
         }
         
-        FindObjectOfType<AudioManager>().Play("ShotSound");
+        // FindObjectOfType<AudioManager>().Play("ShotSound");
     }
 
     void ExplosiveShot()
@@ -95,7 +95,7 @@ public class PlayerShooter : MonoBehaviour
 
         explosiveAvailable = false;
 
-        FindObjectOfType<AudioManager>().Play("PowerUpShot");
+        // FindObjectOfType<AudioManager>().Play("PowerUpShot");
     }
 
     void ExplosiveShotTimer()
