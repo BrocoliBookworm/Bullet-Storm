@@ -23,6 +23,7 @@ TagManager:
   - ExplosiveShot
   - ShipSurvivor
   - ExtraShipSurvivor
+  - Button
   layers:
   - Default
   - TransparentFX
