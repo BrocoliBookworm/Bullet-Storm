@@ -39,13 +39,13 @@ public class MainMenu : MonoBehaviour
     public void RestartGame()
     {
         FindObjectOfType<AudioManager>().Play("MenuSelect");
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
         Time.timeScale = 1f;
     }
 
     public void Title()
     {
         FindObjectOfType<AudioManager>().Play("MenuSelect");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
