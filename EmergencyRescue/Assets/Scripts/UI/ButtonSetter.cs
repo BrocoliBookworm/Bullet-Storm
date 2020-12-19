@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ButtonSetter : MonoBehaviour
 {
+    private static ButtonSetter _instance;
+
     public float timer;
 
     public GameObject playButton;
@@ -13,6 +15,17 @@ public class ButtonSetter : MonoBehaviour
     public bool wentBack = false;
 
     public bool goForwards = false;
+
+    public static ButtonSetter Instance()
+    {
+        if(_instance == null)
+        {
+            GameObject go = new GameObject("Story"); //assign instance to this instance of the class
+            go.AddComponent<ButtonSetter>();
+        }
+
+        return _instance;
+    }
 
     void Start()
     {
